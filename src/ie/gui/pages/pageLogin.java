@@ -32,8 +32,10 @@ public class pageLogin extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         btnSubmit = new javax.swing.JButton();
         btnCreateProfile = new javax.swing.JButton();
-        lblIcon = new javax.swing.JLabel();
         fldLogin = new javax.swing.JTextField();
+        iconDatabase = new javax.swing.JLabel();
+        isAvailable = new javax.swing.JLabel();
+        isWorking = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +58,11 @@ public class pageLogin extends javax.swing.JFrame {
             }
         });
 
-        lblIcon.setText("icon");
+        iconDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/iconDatabase.png"))); // NOI18N
+        iconDatabase.setText("jLabel1");
+
+        isWorking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/iconNotWorking.png"))); // NOI18N
+        isWorking.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,15 +78,18 @@ public class pageLogin extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPasswordField1)
-                            .addComponent(fldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                        .addGap(40, 40, 40)
-                        .addComponent(btnSubmit)
-                        .addContainerGap(103, Short.MAX_VALUE))
+                            .addComponent(fldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                    .addComponent(btnCreateProfile))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSubmit)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCreateProfile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71))))
+                        .addComponent(iconDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(isWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(isAvailable)))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,15 +100,23 @@ public class pageLogin extends javax.swing.JFrame {
                         .addComponent(lblLogin)
                         .addComponent(fldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSubmit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreateProfile)
-                    .addComponent(lblIcon))
-                .addGap(37, 37, 37))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCreateProfile)
+                            .addComponent(iconDatabase))
+                        .addGap(74, 74, 74))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(isWorking)
+                            .addComponent(isAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -152,9 +169,11 @@ public class pageLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnCreateProfile;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JTextField fldLogin;
+    private javax.swing.JLabel iconDatabase;
+    private javax.swing.JLabel isAvailable;
+    private javax.swing.JLabel isWorking;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel lblIcon;
     private javax.swing.JLabel lblLogin;
     // End of variables declaration//GEN-END:variables
 }
