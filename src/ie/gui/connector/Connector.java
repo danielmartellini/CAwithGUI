@@ -15,16 +15,17 @@ public class Connector {
 
     public static Connection connector() {
         java.sql.Connection connection = null;
-        String dbServer = "jdbc:mysql://localhost:3306/people";
+        String dbServer = "jdbc:mysql://localhost:3306/ca";
         String user = "root";
         String password = "root";
         
         try{
-            Class.forName("com.mysql.jdbc.Driver") ;
+            Class.forName("com.mysql.cj.jdbc.Driver") ;
                 connection = DriverManager.getConnection(dbServer, user, password);
                 return connection;
         }
         catch(Exception e){
+            //returns null in case it doesn't connect to the database
             return null;
         }
         

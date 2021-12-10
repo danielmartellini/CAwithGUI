@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ie.gui.pages;
+
 import ie.gui.connector.Connector;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,11 +15,44 @@ import ie.gui.connector.Connector;
  */
 public class PageLogin extends javax.swing.JFrame {
 
+    Connection connection = null;
+    PreparedStatement sqlStatement = null;
+    ResultSet resultSet = null;
+
     /**
      * Creates new form pageLogin
      */
     public PageLogin() {
         initComponents();
+        connection = Connector.connector();
+        System.out.println(connection);
+
+        if (connection != null) {
+            lblIsWorking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/IconWorking.png")));
+        } else {
+            lblIsWorking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/IconNotWorking.png")));
+        }
+    }
+
+    public void login() {
+        String sql = "SELECT * FROM user where username=? and pass=? ";
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+
+            sqlStatement.setString(1, txtUsername.getText());
+            String passwordCapture= new String(txtPassword.getPassword());
+            sqlStatement.setString(2, passwordCapture);
+
+            resultSet = sqlStatement.executeQuery();
+            if (resultSet.next()) {
+                PageMain pageMain = new PageMain();
+                pageMain.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Username or Password is invalid");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     /**
@@ -28,29 +64,37 @@ public class PageLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblLogin = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        btnSubmit = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
+        btnLogin = new javax.swing.JButton();
         btnCreateProfile = new javax.swing.JButton();
-        fldLogin = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         iconDatabase = new javax.swing.JLabel();
         isAvailable = new javax.swing.JLabel();
-        isWorking = new javax.swing.JLabel();
+        lblIsWorking = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
-        lblLogin.setText("Login:");
+        lblUsername.setText("Username:");
 
         jLabel2.setText("Password:");
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                txtPasswordActionPerformed(evt);
             }
         });
 
-        btnSubmit.setText("Submit");
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnCreateProfile.setText("Create Profile");
         btnCreateProfile.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +106,8 @@ public class PageLogin extends javax.swing.JFrame {
         iconDatabase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/iconDatabase.png"))); // NOI18N
         iconDatabase.setText("jLabel1");
 
-        isWorking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/iconNotWorking.png"))); // NOI18N
-        isWorking.setText("jLabel1");
+        lblIsWorking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ie/gui/icons/iconNotWorking.png"))); // NOI18N
+        lblIsWorking.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,21 +117,21 @@ public class PageLogin extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
-                            .addComponent(fldLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
+                            .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword)
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
                     .addComponent(btnCreateProfile))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSubmit)
+                    .addComponent(btnLogin)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(iconDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(isWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblIsWorking, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(isAvailable)))
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -98,15 +142,15 @@ public class PageLogin extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblLogin)
-                        .addComponent(fldLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnSubmit))
+                        .addComponent(lblUsername)
+                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLogin))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCreateProfile)
@@ -115,21 +159,26 @@ public class PageLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(isWorking)
+                            .addComponent(lblIsWorking)
                             .addComponent(isAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnCreateProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateProfileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCreateProfileActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        login();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,13 +218,13 @@ public class PageLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateProfile;
-    private javax.swing.JButton btnSubmit;
-    private javax.swing.JTextField fldLogin;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel iconDatabase;
     private javax.swing.JLabel isAvailable;
-    private javax.swing.JLabel isWorking;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblIsWorking;
+    private javax.swing.JLabel lblUsername;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
