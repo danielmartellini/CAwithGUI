@@ -45,9 +45,12 @@ public class PageLogin extends javax.swing.JFrame {
             //I could also use getText() for my password but from what I read that's a more secure way.
             String passwordCapture= new String(txtPassword.getPassword());
             sqlStatement.setString(2, passwordCapture);
-
+            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
             resultSet = sqlStatement.executeQuery();
             if (resultSet.next()) {
+                String isAdmin= resultSet.getString(4);
+                System.out.println(isAdmin);
+                
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
                 //closes login page when login is successful
