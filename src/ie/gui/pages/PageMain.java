@@ -41,8 +41,10 @@ public class PageMain extends javax.swing.JFrame {
         menu6 = new java.awt.Menu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuMyProfile = new javax.swing.JMenu();
+        menuAdminFunctions = new javax.swing.JMenu();
+        menuItemViewUsers = new javax.swing.JMenuItem();
+        menuItemCreateUser = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenu();
         menuItemChangeUser = new javax.swing.JMenuItem();
         menuItemExit = new javax.swing.JMenuItem();
@@ -80,11 +82,19 @@ public class PageMain extends javax.swing.JFrame {
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        menuMyProfile.setText("My Profile");
+        jMenuBar1.add(menuMyProfile);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        menuAdminFunctions.setText("Admin Functions");
+        menuAdminFunctions.setEnabled(false);
+
+        menuItemViewUsers.setText("View Users");
+        menuAdminFunctions.add(menuItemViewUsers);
+
+        menuItemCreateUser.setText("Create User");
+        menuAdminFunctions.add(menuItemCreateUser);
+
+        jMenuBar1.add(menuAdminFunctions);
 
         menuLogout.setText("Logout");
 
@@ -184,8 +194,6 @@ public class PageMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
@@ -193,11 +201,15 @@ public class PageMain extends javax.swing.JFrame {
     private java.awt.Menu menu4;
     private java.awt.Menu menu5;
     private java.awt.Menu menu6;
+    public static javax.swing.JMenu menuAdminFunctions;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
     private java.awt.MenuBar menuBar3;
     private javax.swing.JMenuItem menuItemChangeUser;
+    private javax.swing.JMenuItem menuItemCreateUser;
     private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemViewUsers;
     private javax.swing.JMenu menuLogout;
+    private javax.swing.JMenu menuMyProfile;
     // End of variables declaration//GEN-END:variables
 }

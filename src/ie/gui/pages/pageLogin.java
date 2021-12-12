@@ -48,13 +48,23 @@ public class PageLogin extends javax.swing.JFrame {
             //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
             resultSet = sqlStatement.executeQuery();
             if (resultSet.next()) {
+                
                 String isAdmin= resultSet.getString(4);
                 System.out.println(isAdmin);
+                if(isAdmin.equals("1")){
+                PageMain pageMain = new PageMain();
+                pageMain.setVisible(true);
+                pageMain.menuAdminFunctions.setEnabled(true);
+                //closes login page when login is successful
+                this.dispose();
+                //stops sql connection
+                }
                 
+                else{
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
                 //closes login page when login is successful
-                this.dispose();
+                this.dispose();}
                 //stops sql connection 
                 connection.close();
                 
@@ -219,6 +229,68 @@ public class PageLogin extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PageLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
