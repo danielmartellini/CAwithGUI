@@ -35,6 +35,7 @@ public class PageLogin extends javax.swing.JFrame {
     }
 
     public void login() {
+        //string sql is my query for user and passwords that match, and my code is gonna change the ? marks for waht the user typed in the respetive fields
         String sql = "SELECT * FROM user where username=? and pass=? ";
         try {
             sqlStatement = connection.prepareStatement(sql);
@@ -48,9 +49,11 @@ public class PageLogin extends javax.swing.JFrame {
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
             } else {
+                //this is gonna create a pop up window to show that no matching credentials were found in the database
                 JOptionPane.showMessageDialog(null, "Username or Password is invalid");
             }
         } catch (Exception e) {
+            //shows a sql message when not connected to the mySQL server properly
             JOptionPane.showMessageDialog(null, e);
         }
     }
