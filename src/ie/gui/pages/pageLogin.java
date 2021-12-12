@@ -55,6 +55,8 @@ public class PageLogin extends javax.swing.JFrame {
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
                 pageMain.menuAdminFunctions.setEnabled(true);
+                pageMain.menuMyProfile.setText(resultSet.getString(2));
+                
                 //closes login page when login is successful
                 this.dispose();
                 //stops sql connection
@@ -63,10 +65,13 @@ public class PageLogin extends javax.swing.JFrame {
                 else{
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
+                pageMain.menuMyProfile.setText(resultSet.getString(2));
                 //closes login page when login is successful
-                this.dispose();}
+                this.dispose();
+                }
                 //stops sql connection 
                 connection.close();
+                
                 
                 
             } else {

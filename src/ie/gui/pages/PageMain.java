@@ -39,7 +39,7 @@ public class PageMain extends javax.swing.JFrame {
         menuBar3 = new java.awt.MenuBar();
         menu5 = new java.awt.Menu();
         menu6 = new java.awt.Menu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        desktopArea = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuMyProfile = new javax.swing.JMenu();
         menuAdminFunctions = new javax.swing.JMenu();
@@ -71,14 +71,14 @@ public class PageMain extends javax.swing.JFrame {
         setTitle("Menu");
         setResizable(false);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout desktopAreaLayout = new javax.swing.GroupLayout(desktopArea);
+        desktopArea.setLayout(desktopAreaLayout);
+        desktopAreaLayout.setHorizontalGroup(
+            desktopAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 540, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        desktopAreaLayout.setVerticalGroup(
+            desktopAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
@@ -92,6 +92,11 @@ public class PageMain extends javax.swing.JFrame {
         menuAdminFunctions.add(menuItemViewUsers);
 
         menuItemCreateUser.setText("Create User");
+        menuItemCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCreateUserActionPerformed(evt);
+            }
+        });
         menuAdminFunctions.add(menuItemCreateUser);
 
         jMenuBar1.add(menuAdminFunctions);
@@ -124,13 +129,13 @@ public class PageMain extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(desktopArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jDesktopPane1)
+                .addComponent(desktopArea)
                 .addContainerGap())
         );
 
@@ -156,6 +161,13 @@ public class PageMain extends javax.swing.JFrame {
             System.exit(0);
     }//GEN-LAST:event_menuItemExitActionPerformed
     }
+    private void menuItemCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCreateUserActionPerformed
+        //opens a form to add a user, only if u are an admin you will get this option
+        PageCreateUser addUser = new PageCreateUser();
+        addUser.setVisible(true);
+        desktopArea.add(addUser);
+    }//GEN-LAST:event_menuItemCreateUserActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -193,7 +205,7 @@ public class PageMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane desktopArea;
     private javax.swing.JMenuBar jMenuBar1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
@@ -210,6 +222,6 @@ public class PageMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemExit;
     private javax.swing.JMenuItem menuItemViewUsers;
     private javax.swing.JMenu menuLogout;
-    private javax.swing.JMenu menuMyProfile;
+    public static javax.swing.JMenu menuMyProfile;
     // End of variables declaration//GEN-END:variables
 }
