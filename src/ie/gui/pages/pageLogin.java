@@ -5,6 +5,7 @@
  */
 package ie.gui.pages;
 
+
 import ie.gui.connector.Connector;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ public class PageLogin extends javax.swing.JFrame {
             sqlStatement = connection.prepareStatement(sql);
 
             sqlStatement.setString(1, txtUsername.getText());
+            //I could also use getText() for my password but from what I read that's a more secure way.
             String passwordCapture= new String(txtPassword.getPassword());
             sqlStatement.setString(2, passwordCapture);
 
@@ -48,6 +50,12 @@ public class PageLogin extends javax.swing.JFrame {
             if (resultSet.next()) {
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
+                //closes login page when login is successful
+                this.dispose();
+                //stops sql connection 
+                connection.close();
+                
+                
             } else {
                 //this is gonna create a pop up window to show that no matching credentials were found in the database
                 JOptionPane.showMessageDialog(null, "Username or Password is invalid");
