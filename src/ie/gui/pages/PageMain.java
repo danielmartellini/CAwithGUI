@@ -201,6 +201,9 @@ public class PageMain extends javax.swing.JFrame {
                 PageEditMyProfile editProfile = new  PageEditMyProfile();
                 editProfile.setVisible(true);
                 desktopArea.add(editProfile);
+                PageEditMyProfile.txtIdField.setText(resultSet.getString(1));                
+                PageEditMyProfile.txtUsername.setText(resultSet.getString(2));
+                PageEditMyProfile.txtPassword.setText(resultSet.getString(3));
             }
             else{
                 JOptionPane.showMessageDialog(null, "Credentials do NOT Match");
