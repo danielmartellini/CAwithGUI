@@ -5,6 +5,10 @@
  */
 package ie.gui.pages;
 
+import ie.gui.connector.Connector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +20,13 @@ public class PageMain extends javax.swing.JFrame {
     /**
      * Creates new form pageMain
      */
+        Connection connection = null;
+    PreparedStatement sqlStatement = null;
+    ResultSet resultSet = null;
+
     public PageMain() {
         initComponents();
+        connection = Connector.connector();
   
     }
 
@@ -42,6 +51,7 @@ public class PageMain extends javax.swing.JFrame {
         desktopArea = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuMyProfile = new javax.swing.JMenu();
+        menuItemEditMyProfile = new javax.swing.JMenuItem();
         menuAdminFunctions = new javax.swing.JMenu();
         menuItemViewUsers = new javax.swing.JMenuItem();
         menuItemCreateUser = new javax.swing.JMenuItem();
@@ -83,6 +93,15 @@ public class PageMain extends javax.swing.JFrame {
         );
 
         menuMyProfile.setText("My Profile");
+
+        menuItemEditMyProfile.setText("Edit my account");
+        menuItemEditMyProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEditMyProfileActionPerformed(evt);
+            }
+        });
+        menuMyProfile.add(menuItemEditMyProfile);
+
         jMenuBar1.add(menuMyProfile);
 
         menuAdminFunctions.setText("Admin Functions");
@@ -167,6 +186,31 @@ public class PageMain extends javax.swing.JFrame {
         addUser.setVisible(true);
         desktopArea.add(addUser);
     }//GEN-LAST:event_menuItemCreateUserActionPerformed
+
+    private void menuItemEditMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEditMyProfileActionPerformed
+        String passwordTest = JOptionPane.showInputDialog("Please confirm your password to be able to do that:");
+        String sql = "SELECT * FROM user where username=? and pass=? ";
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+            sqlStatement.setString(1, menuMyProfile.getText());
+            sqlStatement.setString(2, passwordTest);
+            System.out.println(passwordTest);
+            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
+            resultSet = sqlStatement.executeQuery();
+            if (resultSet.next()){
+                PageEditMyProfile editProfile = new  PageEditMyProfile();
+                editProfile.setVisible(true);
+                desktopArea.add(editProfile);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Credentials do NOT Match");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database");
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_menuItemEditMyProfileActionPerformed
     
     /**
      * @param args the command line arguments
@@ -219,6 +263,7 @@ public class PageMain extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar3;
     private javax.swing.JMenuItem menuItemChangeUser;
     private javax.swing.JMenuItem menuItemCreateUser;
+    private javax.swing.JMenuItem menuItemEditMyProfile;
     private javax.swing.JMenuItem menuItemExit;
     private javax.swing.JMenuItem menuItemViewUsers;
     private javax.swing.JMenu menuLogout;

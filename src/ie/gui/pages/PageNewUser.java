@@ -130,7 +130,7 @@ public class PageNewUser extends javax.swing.JFrame {
                     sqlStatement.setString(1, txtNewUsername.getText());
                     String passwordCapture= new String(txtNewPassword.getPassword());
                     sqlStatement.setString(2, passwordCapture);
-                    sqlStatement.executeUpdate();
+                    sqlStatement.executeUpdate(); 
                     JOptionPane.showMessageDialog(null, "User created successfully");
                     this.dispose();
                 }
@@ -141,7 +141,7 @@ public class PageNewUser extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
     }
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
