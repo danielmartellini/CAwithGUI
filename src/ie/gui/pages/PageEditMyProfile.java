@@ -36,25 +36,22 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
         String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
 
         try {
-            System.out.println(originalUsername = txtUsername.getText());
-            System.out.println(PageMain.menuMyProfile.getText());
+            
             sqlStatement = connection.prepareStatement(sqlUsernameQuery);
             sqlStatement.setString(1, txtUsername.getText());
             resultSet = sqlStatement.executeQuery();
 
-            if (resultSet.next() && originalUsername!=txtUsername.getText()) {
+            if ( !originalUsername.equals(txtUsername.getText())&& resultSet.next()) {
                 //user will reach this if username is already taken
+                System.out.println(originalUsername+"original");
+                System.out.println(txtUsername.getText()+"read");
                 JOptionPane.showMessageDialog(null, "This username is already registered in our database");
             } 
             else if ("".equals(txtPassword.getText())||"".equals(txtUsername.getText())) {
 
                 JOptionPane.showMessageDialog(null, "Username and Password fields can't be left blank");
             } else {
-                if(originalUsername!=txtUsername.getText()){
-                    System.out.println("outro");}
-                else{
-                    System.out.println("outro nome");}
-                
+         
                 sqlStatement = connection.prepareStatement(sql);
                 sqlStatement.setString(1, txtUsername.getText());
                 sqlStatement.setString(2, txtPassword.getText());
