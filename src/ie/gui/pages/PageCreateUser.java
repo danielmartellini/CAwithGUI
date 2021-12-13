@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ie.gui.pages;
+import ie.gui.connector.Connector;
+import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
