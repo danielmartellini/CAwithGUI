@@ -20,7 +20,7 @@ public class PageMain extends javax.swing.JFrame {
     /**
      * Creates new form pageMain
      */
-        Connection connection = null;
+    Connection connection = null;
     PreparedStatement sqlStatement = null;
     ResultSet resultSet = null;
 
@@ -108,6 +108,11 @@ public class PageMain extends javax.swing.JFrame {
         menuAdminFunctions.setEnabled(false);
 
         menuItemViewUsers.setText("View Users");
+        menuItemViewUsers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemViewUsersActionPerformed(evt);
+            }
+        });
         menuAdminFunctions.add(menuItemViewUsers);
 
         menuItemCreateUser.setText("Create User");
@@ -214,6 +219,12 @@ public class PageMain extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_menuItemEditMyProfileActionPerformed
+
+    private void menuItemViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemViewUsersActionPerformed
+        PageViewUsers viewUsers = new PageViewUsers();
+        viewUsers.setVisible(true);
+        desktopArea.add(viewUsers);
+    }//GEN-LAST:event_menuItemViewUsersActionPerformed
     
     /**
      * @param args the command line arguments
