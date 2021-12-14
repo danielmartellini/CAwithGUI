@@ -202,14 +202,17 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         update();
+        fetchAndRefresh();
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        delete();
+        fetchAndRefresh();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnFetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchActionPerformed
-        // TODO add your handling code here:
+     fetchAndRefresh();
+    
     }//GEN-LAST:event_btnFetchActionPerformed
     private void setFieldsFromTable() {
         int set = tblUsers.getSelectedRow();
@@ -221,6 +224,27 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
         } else {
             cboAdmin.setSelectedItem("User");
             System.out.println(tblUsers.getModel().getValueAt(set, 3).toString());
+        }
+
+    }
+    
+    private void fetchAndRefresh(){
+            String sql = "SELECT * FROM user";
+
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+            
+            resultSet = sqlStatement.executeQuery();
+
+            tblUsers.setModel(DbUtils.resultSetToTableModel(resultSet));
+            
+            txtUsername.setText(null);
+            txtPassword.setText(null);
+            
+            btnFetch.setText("Refresh database");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database " + e);
         }
 
     }
@@ -240,7 +264,32 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
         }
 
     }
-
+    
+    private void delete(){
+    int confirm =JOptionPane.showConfirmDialog(null,"ARE YOU SURE YOU WANT TO DELETE THE SELECTED USER?","WARNING",JOptionPane.YES_NO_OPTION);
+    int set = tblUsers.getSelectedRow();
+    if(confirm==JOptionPane.YES_OPTION){
+        String sql = "DELETE FROM user WHERE id=?";
+        try{
+            
+        sqlStatement=connection.prepareStatement(sql);
+        sqlStatement.setString(1,tblUsers.getModel().getValueAt(set, 0).toString());
+        int deleted = sqlStatement.executeUpdate();
+        if (deleted>0){
+            
+            JOptionPane.showMessageDialog(null, "User deleted from database");
+            
+        }
+        
+        
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Couldn't connect to database properly");
+            
+        
+    }
+    }
+    }
     private void update() {
         String sql = "UPDATE user SET username=?,pass=?,isAdmin=? WHERE id=?";
         String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
@@ -272,8 +321,9 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
                 }
                 sqlStatement.setString(4,tblUsers.getModel().getValueAt(set, 0).toString());
                 sqlStatement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Account updated");
-                this.dispose();
+                JOptionPane.showMessageDialog(null, "Account updated "
+                        + "Please click on refresh database to see modifications");
+                
                 
                 
 
