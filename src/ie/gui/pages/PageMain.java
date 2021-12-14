@@ -187,9 +187,10 @@ public class PageMain extends javax.swing.JFrame {
     }
     private void menuItemCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCreateUserActionPerformed
         //opens a form to add a user, only if u are an admin you will get this option
-        PageCreateUser addUser = new PageCreateUser();
+        PageNewUser addUser = new PageNewUser();
         addUser.setVisible(true);
-        desktopArea.add(addUser);
+        PageNewUser.cboAdmin.setEnabled(true);
+        
     }//GEN-LAST:event_menuItemCreateUserActionPerformed
 
     private void menuItemEditMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEditMyProfileActionPerformed

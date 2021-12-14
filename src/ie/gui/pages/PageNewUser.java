@@ -44,6 +44,8 @@ public class PageNewUser extends javax.swing.JFrame {
         txtNewUsername = new javax.swing.JTextField();
         txtNewPasswordConfirm = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
+        cboAdmin = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create an account");
@@ -67,16 +69,31 @@ public class PageNewUser extends javax.swing.JFrame {
 
         jLabel3.setText("Confirm your password:");
 
+        cboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
+        cboAdmin.setEnabled(false);
+        cboAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAdminActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Admin:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtNewPasswordConfirm)
@@ -101,7 +118,11 @@ public class PageNewUser extends javax.swing.JFrame {
                     .addComponent(txtNewPasswordConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCreateAccount)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreateAccount)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -114,7 +135,7 @@ public class PageNewUser extends javax.swing.JFrame {
 
     private void userCreator() {
         String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
-        String sqlCreateUser = "INSERT INTO user(username, pass) VALUES(?,?);";
+        String sqlCreateUser = "INSERT INTO user (username, pass, isAdmin) VALUES(?,?,?);";
 
         try {
             sqlStatement = connection.prepareStatement(sqlUsernameQuery);
@@ -130,7 +151,16 @@ public class PageNewUser extends javax.swing.JFrame {
                     sqlStatement.setString(1, txtNewUsername.getText());
                     String passwordCapture= new String(txtNewPassword.getPassword());
                     sqlStatement.setString(2, passwordCapture);
+                    if("Yes".equals(cboAdmin.getSelectedItem().toString())){
+                        sqlStatement.setString(3, "1");
+                        System.out.println("funcionando");
+                    }
+                    else{
+                    sqlStatement.setString(3, "0");
+                    }
+                    System.out.println("1");
                     sqlStatement.executeUpdate(); 
+                    System.out.println("2");
                     JOptionPane.showMessageDialog(null, "User created successfully");
                     this.dispose();
                 }
@@ -147,6 +177,10 @@ public class PageNewUser extends javax.swing.JFrame {
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         userCreator();
     }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+    private void cboAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,9 +219,11 @@ public class PageNewUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateAccount;
+    public static javax.swing.JComboBox<String> cboAdmin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField txtNewPassword;
     private javax.swing.JPasswordField txtNewPasswordConfirm;
     private javax.swing.JTextField txtNewUsername;
