@@ -263,7 +263,7 @@ public class PageMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane desktopArea;
+    public static javax.swing.JDesktopPane desktopArea;
     private javax.swing.JMenuBar jMenuBar1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
@@ -279,7 +279,7 @@ public class PageMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCreateUser;
     private javax.swing.JMenuItem menuItemEditMyProfile;
     private javax.swing.JMenuItem menuItemExit;
-    private javax.swing.JMenuItem menuItemViewUsers;
+    public javax.swing.JMenuItem menuItemViewUsers;
     private javax.swing.JMenu menuLogout;
     public static javax.swing.JMenu menuMyProfile;
     // End of variables declaration//GEN-END:variables

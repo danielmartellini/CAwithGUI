@@ -51,7 +51,8 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(null, "Username and Password fields can't be left blank");
             } else {
-         
+                
+                
                 sqlStatement = connection.prepareStatement(sql);
                 sqlStatement.setString(1, txtUsername.getText());
                 sqlStatement.setString(2, txtPassword.getText());

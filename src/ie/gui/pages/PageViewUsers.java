@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package ie.gui.pages;
+
 import ie.gui.connector.Connector;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author danie
@@ -20,9 +22,10 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
     Connection connection = null;
     PreparedStatement sqlStatement = null;
     ResultSet resultSet = null;
+
     public PageViewUsers() {
         initComponents();
-       // quickSearch();
+        // quickSearch();
         connection = Connector.connector();
     }
 
@@ -39,6 +42,15 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
         tblUsers = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtQuickSearch = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtPassword = new javax.swing.JTextField();
+        cboAdmin = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnFetch = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -54,6 +66,11 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUsers);
 
         jLabel1.setText("Quick search:");
@@ -69,28 +86,99 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setText("Username:");
+
+        jLabel3.setText("Password:");
+
+        cboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
+        cboAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboAdminActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Admin:");
+
+        btnUpdate.setText("Update User");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete User");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnFetch.setText("Search for users on database");
+        btnFetch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFetchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUsername)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFetch)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addGap(9, 9, 9)
+                .addComponent(btnFetch)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(btnUpdate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDelete)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 540, 410);
@@ -103,27 +191,111 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
     private void txtQuickSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuickSearchKeyReleased
         quickSearch();
     }//GEN-LAST:event_txtQuickSearchKeyReleased
-    
-    private void quickSearch(){
-        String sql=  "SELECT * FROM user WHERE username LIKE ?";
-        
-        try{
-            sqlStatement= connection.prepareStatement(sql);
-            sqlStatement.setString(1,txtQuickSearch.getText()+ "%");
-            resultSet=sqlStatement.executeQuery();
-            
-            tblUsers.setModel(DbUtils.resultSetToTableModel(resultSet));
-            
+
+    private void tblUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsersMouseClicked
+        setFieldsFromTable();
+    }//GEN-LAST:event_tblUsersMouseClicked
+
+    private void cboAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboAdminActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        update();
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnFetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFetchActionPerformed
+    private void setFieldsFromTable() {
+        int set = tblUsers.getSelectedRow();
+        txtUsername.setText(tblUsers.getModel().getValueAt(set, 1).toString());
+        txtPassword.setText(tblUsers.getModel().getValueAt(set, 2).toString());
+
+        if ("1".equals(tblUsers.getModel().getValueAt(set, 3).toString())) {
+            cboAdmin.setSelectedItem("Admin");
+        } else {
+            cboAdmin.setSelectedItem("User");
+            System.out.println(tblUsers.getModel().getValueAt(set, 3).toString());
         }
-        catch(Exception e){
-        JOptionPane.showMessageDialog(null, "Something went wrong in our database "+e);}
-        
+
+    }
+
+    private void quickSearch() {
+        String sql = "SELECT * FROM user WHERE username LIKE ?";
+
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+            sqlStatement.setString(1, txtQuickSearch.getText() + "%");
+            resultSet = sqlStatement.executeQuery();
+
+            tblUsers.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database " + e);
+        }
+
+    }
+
+    private void update() {
+        String sql = "UPDATE user SET username=?,pass=?,isAdmin=? WHERE id=?";
+        String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
+        int set = tblUsers.getSelectedRow();
+
+        try {
+
+            sqlStatement = connection.prepareStatement(sqlUsernameQuery);
+            sqlStatement.setString(1, txtUsername.getText());
+            resultSet = sqlStatement.executeQuery();
+
+            if (!tblUsers.getModel().getValueAt(set, 1).toString().equals(txtUsername.getText()) && resultSet.next()) {
+                //user will reach this if username is already taken
+                System.out.println(tblUsers.getModel().getValueAt(set, 1).toString() + "original");
+                System.out.println(txtUsername.getText() + "read");
+                JOptionPane.showMessageDialog(null, "This username is already registered in our database");
+            } else if ("".equals(txtPassword.getText()) || "".equals(txtUsername.getText())) {
+
+                JOptionPane.showMessageDialog(null, "Username and Password fields can't be left blank");
+            } else {
+
+                sqlStatement = connection.prepareStatement(sql);
+                sqlStatement.setString(1, txtUsername.getText());
+                sqlStatement.setString(2, txtPassword.getText());
+                if ("Admin".equals(cboAdmin.getSelectedItem().toString())) {
+                    sqlStatement.setString(3, "1");
+                } else {
+                    sqlStatement.setString(3, "0");
+                }
+                sqlStatement.setString(4,tblUsers.getModel().getValueAt(set, 0).toString());
+                sqlStatement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Account updated");
+                this.dispose();
+                
+                
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnFetch;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cboAdmin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblUsers;
+    private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtQuickSearch;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
