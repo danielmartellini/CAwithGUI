@@ -27,7 +27,33 @@ public class PageMain extends javax.swing.JFrame {
     public PageMain() {
         initComponents();
         connection = Connector.connector();
-  
+
+    }
+    private void editMyProfilePasswordTest(){
+         String passwordTest = JOptionPane.showInputDialog("Please confirm your password to be able to do that:");
+        String sql = "SELECT * FROM user where username=? and pass=? ";
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+            sqlStatement.setString(1, menuMyProfile.getText());
+            sqlStatement.setString(2, passwordTest);
+            System.out.println(passwordTest);
+            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
+            resultSet = sqlStatement.executeQuery();
+            if (resultSet.next()) {
+                PageEditMyProfile editProfile = new PageEditMyProfile();
+                editProfile.setVisible(true);
+                desktopArea.add(editProfile);
+                PageEditMyProfile.txtIdField.setText(resultSet.getString(1));
+                PageEditMyProfile.txtUsername.setText(resultSet.getString(2));
+                PageEditMyProfile.txtPassword.setText(resultSet.getString(3));
+            } else {
+                JOptionPane.showMessageDialog(null, "Credentials do NOT Match");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database");
+            System.out.println(e);
+        }
+    
     }
 
     /**
@@ -49,10 +75,11 @@ public class PageMain extends javax.swing.JFrame {
         menu5 = new java.awt.Menu();
         menu6 = new java.awt.Menu();
         desktopArea = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         menuMyProfile = new javax.swing.JMenu();
         menuItemEditMyProfile = new javax.swing.JMenuItem();
         menuCalculator = new javax.swing.JMenu();
+        menuItemCalculatorTwoVariables = new javax.swing.JMenuItem();
         menuCalculatorThreeByThree = new javax.swing.JMenuItem();
         menuAdminFunctions = new javax.swing.JMenu();
         menuItemViewUsers = new javax.swing.JMenuItem();
@@ -104,9 +131,17 @@ public class PageMain extends javax.swing.JFrame {
         });
         menuMyProfile.add(menuItemEditMyProfile);
 
-        jMenuBar1.add(menuMyProfile);
+        menuBar.add(menuMyProfile);
 
         menuCalculator.setText("Calculator");
+
+        menuItemCalculatorTwoVariables.setText("2 variables system");
+        menuItemCalculatorTwoVariables.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCalculatorTwoVariablesActionPerformed(evt);
+            }
+        });
+        menuCalculator.add(menuItemCalculatorTwoVariables);
 
         menuCalculatorThreeByThree.setText("3 variables system");
         menuCalculatorThreeByThree.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +151,7 @@ public class PageMain extends javax.swing.JFrame {
         });
         menuCalculator.add(menuCalculatorThreeByThree);
 
-        jMenuBar1.add(menuCalculator);
+        menuBar.add(menuCalculator);
 
         menuAdminFunctions.setText("Admin Functions");
         menuAdminFunctions.setEnabled(false);
@@ -137,7 +172,7 @@ public class PageMain extends javax.swing.JFrame {
         });
         menuAdminFunctions.add(menuItemCreateUser);
 
-        jMenuBar1.add(menuAdminFunctions);
+        menuBar.add(menuAdminFunctions);
 
         menuLogout.setText("Logout");
 
@@ -157,9 +192,9 @@ public class PageMain extends javax.swing.JFrame {
         });
         menuLogout.add(menuItemExit);
 
-        jMenuBar1.add(menuLogout);
+        menuBar.add(menuLogout);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,20 +217,20 @@ public class PageMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemChangeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemChangeUserActionPerformed
-        int logout = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back to the Login page?","WARNING",JOptionPane.YES_NO_OPTION);
-       if (logout == JOptionPane.YES_OPTION){               
-                PageLogin pageLogin ;
-                pageLogin = new PageLogin();
-                pageLogin.setVisible(true);
-                this.dispose();
-            
-      }
-        
+        int logout = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back to the Login page?", "WARNING", JOptionPane.YES_NO_OPTION);
+        if (logout == JOptionPane.YES_OPTION) {
+            PageLogin pageLogin;
+            pageLogin = new PageLogin();
+            pageLogin.setVisible(true);
+            this.dispose();
+
+        }
+
     }//GEN-LAST:event_menuItemChangeUserActionPerformed
 
     private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
-        int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to close the program?","WARNING",JOptionPane.YES_NO_OPTION);
-        if (exit == JOptionPane.YES_OPTION){
+        int exit = JOptionPane.showConfirmDialog(null, "Are you sure you want to close the program?", "WARNING", JOptionPane.YES_NO_OPTION);
+        if (exit == JOptionPane.YES_OPTION) {
             System.exit(0);
     }//GEN-LAST:event_menuItemExitActionPerformed
     }
@@ -204,35 +239,11 @@ public class PageMain extends javax.swing.JFrame {
         PageNewUser addUser = new PageNewUser();
         addUser.setVisible(true);
         PageNewUser.cboAdmin.setEnabled(true);
-        
+
     }//GEN-LAST:event_menuItemCreateUserActionPerformed
 
     private void menuItemEditMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEditMyProfileActionPerformed
-        String passwordTest = JOptionPane.showInputDialog("Please confirm your password to be able to do that:");
-        String sql = "SELECT * FROM user where username=? and pass=? ";
-        try {
-            sqlStatement = connection.prepareStatement(sql);
-            sqlStatement.setString(1, menuMyProfile.getText());
-            sqlStatement.setString(2, passwordTest);
-            System.out.println(passwordTest);
-            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
-            resultSet = sqlStatement.executeQuery();
-            if (resultSet.next()){
-                PageEditMyProfile editProfile = new  PageEditMyProfile();
-                editProfile.setVisible(true);
-                desktopArea.add(editProfile);
-                PageEditMyProfile.txtIdField.setText(resultSet.getString(1));                
-                PageEditMyProfile.txtUsername.setText(resultSet.getString(2));
-                PageEditMyProfile.txtPassword.setText(resultSet.getString(3));
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Credentials do NOT Match");
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Something went wrong in our database");
-            System.out.println(e);
-        }
+       editMyProfilePasswordTest();
     }//GEN-LAST:event_menuItemEditMyProfileActionPerformed
 
     private void menuItemViewUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemViewUsersActionPerformed
@@ -242,12 +253,18 @@ public class PageMain extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemViewUsersActionPerformed
 
     private void menuCalculatorThreeByThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalculatorThreeByThreeActionPerformed
-          PageCalculatorThreeVariables calculatorThreebyThree = new PageCalculatorThreeVariables ();
-          calculatorThreebyThree.setVisible(true);
-            desktopArea.add(calculatorThreebyThree);
-                                  
+        PageCalculatorThreeVariables calculatorThreebyThree = new PageCalculatorThreeVariables();
+        calculatorThreebyThree.setVisible(true);
+        desktopArea.add(calculatorThreebyThree);
+
     }//GEN-LAST:event_menuCalculatorThreeByThreeActionPerformed
-    
+
+    private void menuItemCalculatorTwoVariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalculatorTwoVariablesActionPerformed
+        PageCalculatorTwoVariables calculatorTwoByTwo = new PageCalculatorTwoVariables();
+        calculatorTwoByTwo.setVisible(true);
+        desktopArea.add(calculatorTwoByTwo);
+    }//GEN-LAST:event_menuItemCalculatorTwoVariablesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,7 +303,6 @@ public class PageMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktopArea;
-    private javax.swing.JMenuBar jMenuBar1;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
@@ -294,11 +310,13 @@ public class PageMain extends javax.swing.JFrame {
     private java.awt.Menu menu5;
     private java.awt.Menu menu6;
     public static javax.swing.JMenu menuAdminFunctions;
+    private javax.swing.JMenuBar menuBar;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
     private java.awt.MenuBar menuBar3;
     private javax.swing.JMenu menuCalculator;
     private javax.swing.JMenuItem menuCalculatorThreeByThree;
+    private javax.swing.JMenuItem menuItemCalculatorTwoVariables;
     private javax.swing.JMenuItem menuItemChangeUser;
     private javax.swing.JMenuItem menuItemCreateUser;
     private javax.swing.JMenuItem menuItemEditMyProfile;
