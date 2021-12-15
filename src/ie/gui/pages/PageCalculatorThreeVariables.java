@@ -41,7 +41,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        txtDet = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtXtwo = new javax.swing.JTextField();
         txtYtwo = new javax.swing.JTextField();
@@ -108,7 +108,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
         jLabel5.setText("  y +");
 
-        jTextField16.setFocusable(false);
+        txtDet.setFocusable(false);
 
         jLabel6.setText("  z =");
 
@@ -219,7 +219,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel11)
                                             .addGap(8, 8, 8)))
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                        .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
                                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(190, 190, 190))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -305,7 +305,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -381,68 +381,86 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtYthreeActionPerformed
 
     private void btnSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolveActionPerformed
-       float a11,a12,a13,constant1;
-       float a21,a22,a23,constant2;
-       float a31,a32,a33,constant3;
-        
-        if("".equals(txtXone.getText()) || "".equals(txtYone.getText())  || "".equals(txtZone.getText()) || "".equals(txtEqualsone.getText())){
-      JOptionPane.showMessageDialog(null, "It seems that one of your variables on the first equation was left blank");
-    }
-        else if ("".equals(txtXtwo.getText()) || "".equals(txtYtwo.getText())  || "".equals(txtZtwo.getText()) || "".equals(txtEqualstwo.getText())){
+        float a11, a12, a13, constant1;
+        float a21, a22, a23, constant2;
+        float a31, a32, a33, constant3;
+
+        if ("".equals(txtXone.getText()) || "".equals(txtYone.getText()) || "".equals(txtZone.getText()) || "".equals(txtEqualsone.getText())) {
+            JOptionPane.showMessageDialog(null, "It seems that one of your variables on the first equation was left blank");
+        } else if ("".equals(txtXtwo.getText()) || "".equals(txtYtwo.getText()) || "".equals(txtZtwo.getText()) || "".equals(txtEqualstwo.getText())) {
             JOptionPane.showMessageDialog(null, "It seems that one of your variables on the second equation was left blank");
-        }
-        else if("".equals(txtXthree.getText()) || "".equals(txtYthree.getText())  || "".equals(txtZthree.getText()) || "".equals(txtEqualsthree.getText())){
-        JOptionPane.showMessageDialog(null, "It seems that one of your variables on the third equation was left blank");}
-        
-        else{
-            try{
-             a11 = Float.parseFloat(txtXone.getText());
-             a12 = Float.parseFloat(txtYone.getText());
-            a13 = Float.parseFloat(txtZone.getText());
-            constant1 =Float.parseFloat(txtEqualsone.getText());
-            
-            a21 = Float.parseFloat(txtXtwo.getText());
-             a22 = Float.parseFloat(txtYtwo.getText());
-            a23 = Float.parseFloat(txtZtwo.getText());
-            constant2 =Float.parseFloat(txtEqualstwo.getText());
-            
-            a31 = Float.parseFloat(txtXthree.getText());
-            a32 = Float.parseFloat(txtYthree.getText());
-            a33 = Float.parseFloat(txtZthree.getText());
-            constant3 =Float.parseFloat(txtEqualsthree.getText());
-            
-            try{
-                  float det = 0;
-            float matrice[][] = new float[3][3];
-            
-            matrice [0][0]= a11;
-            matrice [0][1]= a12;
-            matrice [0][2]= a13;
-            
-            matrice [1][0]= a21;
-            matrice [1][1]= a22;
-            matrice [1][2]= a23;
-            
-            matrice [2][0]= a31;
-            matrice [2][1]= a32;
-            matrice [2][2]= a33;
-        
-               
-           
-           }
-           catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Something went wrong with the calculation");
-                }
-         
-            
+        } else if ("".equals(txtXthree.getText()) || "".equals(txtYthree.getText()) || "".equals(txtZthree.getText()) || "".equals(txtEqualsthree.getText())) {
+            JOptionPane.showMessageDialog(null, "It seems that one of your variables on the third equation was left blank");
+        } else {
+            try {
+                a11 = Float.parseFloat(txtXone.getText());
+                a12 = Float.parseFloat(txtYone.getText());
+                a13 = Float.parseFloat(txtZone.getText());
+                constant1 = Float.parseFloat(txtEqualsone.getText());
+
+                a21 = Float.parseFloat(txtXtwo.getText());
+                a22 = Float.parseFloat(txtYtwo.getText());
+                a23 = Float.parseFloat(txtZtwo.getText());
+                constant2 = Float.parseFloat(txtEqualstwo.getText());
+
+                a31 = Float.parseFloat(txtXthree.getText());
+                a32 = Float.parseFloat(txtYthree.getText());
+                a33 = Float.parseFloat(txtZthree.getText());
+                constant3 = Float.parseFloat(txtEqualsthree.getText());
+                float det = 0;
+                float matrice[][] = new float[3][3];
                 
-            }
-            catch(Exception e){
-                JOptionPane.showMessageDialog(null, "One of the variables entered was not a number, try again!");
+                float invertedMatrice[][] = new float[3][3];
+                try {
+
+                    matrice[0][0] = a11;
+                    matrice[0][1] = a12;
+                    matrice[0][2] = a13;
+
+                    matrice[1][0] = a21;
+                    matrice[1][1] = a22;
+                    matrice[1][2] = a23;
+
+                    matrice[2][0] = a31;
+                    matrice[2][1] = a32;
+                    matrice[2][2] = a33;
+
+                    for (int i = 0; i < 3; i++) {
+                        det = det + (matrice[0][i] * (matrice[1][(i + 1) % 3] * matrice[2][(i + 2) % 3] - matrice[1][(i + 2) % 3] * matrice[2][(i + 1) % 3]));
+                    }
+                    
+                    txtDet.setText(String.valueOf(det));
+                    
+                    if(det==0){
+                    JOptionPane.showMessageDialog(null, "Determinant equal to Zero, impossible to proceed.");
+                    }
+                    else{
+
+                    for (int i = 0; i < 3; ++i) {
+                        for (int j = 0; j < 3; ++j) {
+                            System.out.print((((matrice[(j + 1) % 3][(i + 1) % 3] * matrice[(j + 2) % 3][(i + 2) % 3]) - (matrice[(j + 1) % 3][(i + 2) % 3] * matrice[(j + 2) % 3][(i + 1) % 3])) / det) + " ");
+                             invertedMatrice[i][j]=((((matrice[(j + 1) % 3][(i + 1) % 3] * matrice[(j + 2) % 3][(i + 2) % 3]) - (matrice[(j + 1) % 3][(i + 2) % 3] * matrice[(j + 2) % 3][(i + 1) % 3])) / det));
+                        }
+                        System.out.print("\n");
+
+                        
+                    }
+                    
+                    
+                    }
+                    
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Something went wrong with the calculation");
                 }
-           
+                
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "One of the variables entered was not a number, try again!");
+            }
+
         }
-        
+
     }//GEN-LAST:event_btnSolveActionPerformed
 
 
@@ -464,7 +482,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField txtDet;
     private javax.swing.JTextField txtEqualsone;
     private javax.swing.JTextField txtEqualsthree;
     private javax.swing.JTextField txtEqualstwo;
