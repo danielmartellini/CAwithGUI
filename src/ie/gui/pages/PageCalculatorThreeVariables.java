@@ -154,31 +154,9 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         txtXthree = new javax.swing.JTextField();
         txtYthree = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
-
-        txtZthree.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtZthreeActionPerformed(evt);
-            }
-        });
-
-        txtEqualsthree.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                txtEqualsthreeAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        txtEqualsthree.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEqualsthreeActionPerformed(evt);
-            }
-        });
 
         btnSolve.setText("Solve");
         btnSolve.addActionListener(new java.awt.event.ActionListener() {
@@ -192,18 +170,8 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         txtYfinal.setFocusable(false);
 
         txtXfinal.setFocusable(false);
-        txtXfinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXfinalActionPerformed(evt);
-            }
-        });
 
         txtZfinal.setFocusable(false);
-        txtZfinal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtZfinalActionPerformed(evt);
-            }
-        });
 
         jLabel12.setText("X =");
 
@@ -219,33 +187,6 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
         jLabel6.setText("  z =");
 
-        txtYtwo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYtwoActionPerformed(evt);
-            }
-        });
-
-        txtZtwo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtZtwoActionPerformed(evt);
-            }
-        });
-
-        txtEqualstwo.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                txtEqualstwoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        txtEqualstwo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEqualstwoActionPerformed(evt);
-            }
-        });
-
         jLabel7.setText("  x +");
 
         jLabel8.setText("  y +");
@@ -257,45 +198,6 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         jLabel2.setText("  y +");
 
         jLabel3.setText("  z =");
-
-        txtXone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtXoneActionPerformed(evt);
-            }
-        });
-
-        txtYone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYoneActionPerformed(evt);
-            }
-        });
-
-        txtZone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtZoneActionPerformed(evt);
-            }
-        });
-
-        txtEqualsone.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                txtEqualsoneAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        txtEqualsone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEqualsoneActionPerformed(evt);
-            }
-        });
-
-        txtYthree.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtYthreeActionPerformed(evt);
-            }
-        });
 
         jLabel10.setText(" *If you have to enter a negative number just put the negative sign before the number");
 
@@ -311,31 +213,26 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 7, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(434, 434, 434))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnSolve, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
-                                .addGap(8, 8, 8)
-                                .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
+                        .addComponent(btnSolve, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addGap(8, 8, 8)
+                        .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel12))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtXfinal)
-                                            .addComponent(txtYfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(108, 108, 108))))))
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtXfinal)
+                                    .addComponent(txtYfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(108, 108, 108))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(19, 19, 19)
@@ -388,9 +285,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtXfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,69 +340,9 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtZthreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZthreeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtZthreeActionPerformed
-
-    private void txtEqualsthreeAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtEqualsthreeAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualsthreeAncestorAdded
-
-    private void txtEqualsthreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEqualsthreeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualsthreeActionPerformed
-
-    private void txtZfinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZfinalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtZfinalActionPerformed
-
-    private void txtYtwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYtwoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtYtwoActionPerformed
-
-    private void txtZtwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZtwoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtZtwoActionPerformed
-
-    private void txtEqualstwoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtEqualstwoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualstwoAncestorAdded
-
-    private void txtEqualstwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEqualstwoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualstwoActionPerformed
-
-    private void txtXoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtXoneActionPerformed
-
-    private void txtYoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtYoneActionPerformed
-
-    private void txtZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtZoneActionPerformed
-
-    private void txtEqualsoneAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtEqualsoneAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualsoneAncestorAdded
-
-    private void txtEqualsoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEqualsoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEqualsoneActionPerformed
-
-    private void txtYthreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYthreeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtYthreeActionPerformed
-
     private void btnSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolveActionPerformed
         solveThreeVariables();
     }//GEN-LAST:event_btnSolveActionPerformed
-
-    private void txtXfinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtXfinalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtXfinalActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -518,7 +353,6 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

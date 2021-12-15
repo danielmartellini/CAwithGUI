@@ -80,7 +80,7 @@ public class PageMain extends javax.swing.JFrame {
         menuItemEditMyProfile = new javax.swing.JMenuItem();
         menuCalculator = new javax.swing.JMenu();
         menuItemCalculatorTwoVariables = new javax.swing.JMenuItem();
-        menuCalculatorThreeByThree = new javax.swing.JMenuItem();
+        menuItemCalculatorThreeByThree = new javax.swing.JMenuItem();
         menuAdminFunctions = new javax.swing.JMenu();
         menuItemViewUsers = new javax.swing.JMenuItem();
         menuItemCreateUser = new javax.swing.JMenuItem();
@@ -143,13 +143,13 @@ public class PageMain extends javax.swing.JFrame {
         });
         menuCalculator.add(menuItemCalculatorTwoVariables);
 
-        menuCalculatorThreeByThree.setText("3 variables system");
-        menuCalculatorThreeByThree.addActionListener(new java.awt.event.ActionListener() {
+        menuItemCalculatorThreeByThree.setText("3 variables system");
+        menuItemCalculatorThreeByThree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCalculatorThreeByThreeActionPerformed(evt);
+                menuItemCalculatorThreeByThreeActionPerformed(evt);
             }
         });
-        menuCalculator.add(menuCalculatorThreeByThree);
+        menuCalculator.add(menuItemCalculatorThreeByThree);
 
         menuBar.add(menuCalculator);
 
@@ -252,12 +252,12 @@ public class PageMain extends javax.swing.JFrame {
         desktopArea.add(viewUsers);
     }//GEN-LAST:event_menuItemViewUsersActionPerformed
 
-    private void menuCalculatorThreeByThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCalculatorThreeByThreeActionPerformed
+    private void menuItemCalculatorThreeByThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalculatorThreeByThreeActionPerformed
         PageCalculatorThreeVariables calculatorThreebyThree = new PageCalculatorThreeVariables();
         calculatorThreebyThree.setVisible(true);
         desktopArea.add(calculatorThreebyThree);
 
-    }//GEN-LAST:event_menuCalculatorThreeByThreeActionPerformed
+    }//GEN-LAST:event_menuItemCalculatorThreeByThreeActionPerformed
 
     private void menuItemCalculatorTwoVariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCalculatorTwoVariablesActionPerformed
         PageCalculatorTwoVariables calculatorTwoByTwo = new PageCalculatorTwoVariables();
@@ -315,7 +315,7 @@ public class PageMain extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar2;
     private java.awt.MenuBar menuBar3;
     private javax.swing.JMenu menuCalculator;
-    private javax.swing.JMenuItem menuCalculatorThreeByThree;
+    private javax.swing.JMenuItem menuItemCalculatorThreeByThree;
     private javax.swing.JMenuItem menuItemCalculatorTwoVariables;
     private javax.swing.JMenuItem menuItemChangeUser;
     private javax.swing.JMenuItem menuItemCreateUser;

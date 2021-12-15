@@ -36,23 +36,22 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
         String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
 
         try {
-            
+
             sqlStatement = connection.prepareStatement(sqlUsernameQuery);
             sqlStatement.setString(1, txtUsername.getText());
             resultSet = sqlStatement.executeQuery();
-
-            if ( !originalUsername.equals(txtUsername.getText())&& resultSet.next()) {
+            
+//I have this condtion because otherwise i wouldnt be able to edit other details and keep my username as it is  already registered on the database
+            if (!originalUsername.equals(txtUsername.getText()) && resultSet.next()) {
                 //user will reach this if username is already taken
-                System.out.println(originalUsername+"original");
-                System.out.println(txtUsername.getText()+"read");
+                System.out.println(originalUsername + "original");
+                System.out.println(txtUsername.getText() + "read");
                 JOptionPane.showMessageDialog(null, "This username is already registered in our database");
-            } 
-            else if ("".equals(txtPassword.getText())||"".equals(txtUsername.getText())) {
+            } else if ("".equals(txtPassword.getText()) || "".equals(txtUsername.getText())) {
 
                 JOptionPane.showMessageDialog(null, "Username and Password fields can't be left blank");
             } else {
-                
-                
+
                 sqlStatement = connection.prepareStatement(sql);
                 sqlStatement.setString(1, txtUsername.getText());
                 sqlStatement.setString(2, txtPassword.getText());

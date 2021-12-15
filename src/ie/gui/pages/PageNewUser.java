@@ -27,6 +27,48 @@ public class PageNewUser extends javax.swing.JFrame {
         initComponents();
         connection = Connector.connector();
     }
+    
+    private void userCreator() {
+        String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
+        String sqlCreateUser = "INSERT INTO user (username, pass, isAdmin) VALUES(?,?,?);";
+
+        try {
+            sqlStatement = connection.prepareStatement(sqlUsernameQuery);
+            sqlStatement.setString(1, txtNewUsername.getText());
+            resultSet = sqlStatement.executeQuery();
+            if (resultSet.next()) {
+                //user will reach this if username is already taken
+                JOptionPane.showMessageDialog(null, "This username is already registered in our database");
+            } else {
+                //username available
+                if (Arrays.equals(txtNewPassword.getPassword(), txtNewPasswordConfirm.getPassword())) {
+                    sqlStatement = connection.prepareStatement(sqlCreateUser);
+                    sqlStatement.setString(1, txtNewUsername.getText());
+                    String passwordCapture= new String(txtNewPassword.getPassword());
+                    sqlStatement.setString(2, passwordCapture);
+                    if("Yes".equals(cboAdmin.getSelectedItem().toString())){
+                        sqlStatement.setString(3, "1");
+                       
+                    }
+                    else{
+                    sqlStatement.setString(3, "0");
+                    }
+                    System.out.println("1");
+                    sqlStatement.executeUpdate(); 
+                    System.out.println("2");
+                    JOptionPane.showMessageDialog(null, "User created successfully");
+                    this.dispose();
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Password and password confirmation do NOT match.");
+                    
+                    
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,47 +176,7 @@ public class PageNewUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNewPasswordActionPerformed
 
-    private void userCreator() {
-        String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
-        String sqlCreateUser = "INSERT INTO user (username, pass, isAdmin) VALUES(?,?,?);";
-
-        try {
-            sqlStatement = connection.prepareStatement(sqlUsernameQuery);
-            sqlStatement.setString(1, txtNewUsername.getText());
-            resultSet = sqlStatement.executeQuery();
-            if (resultSet.next()) {
-                //user will reach this if username is already taken
-                JOptionPane.showMessageDialog(null, "This username is already registered in our database");
-            } else {
-                //username available
-                if (Arrays.equals(txtNewPassword.getPassword(), txtNewPasswordConfirm.getPassword())) {
-                    sqlStatement = connection.prepareStatement(sqlCreateUser);
-                    sqlStatement.setString(1, txtNewUsername.getText());
-                    String passwordCapture= new String(txtNewPassword.getPassword());
-                    sqlStatement.setString(2, passwordCapture);
-                    if("Yes".equals(cboAdmin.getSelectedItem().toString())){
-                        sqlStatement.setString(3, "1");
-                       
-                    }
-                    else{
-                    sqlStatement.setString(3, "0");
-                    }
-                    System.out.println("1");
-                    sqlStatement.executeUpdate(); 
-                    System.out.println("2");
-                    JOptionPane.showMessageDialog(null, "User created successfully");
-                    this.dispose();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Password and password confirmation do NOT match.");
-                    
-                    
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+    
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         userCreator();
     }//GEN-LAST:event_btnCreateAccountActionPerformed

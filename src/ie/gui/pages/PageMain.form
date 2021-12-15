@@ -77,12 +77,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemCalculatorTwoVariablesActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="menuCalculatorThreeByThree">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemCalculatorThreeByThree">
               <Properties>
                 <Property name="text" type="java.lang.String" value="3 variables system"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCalculatorThreeByThreeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemCalculatorThreeByThreeActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
