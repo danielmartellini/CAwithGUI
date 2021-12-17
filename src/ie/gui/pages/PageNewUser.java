@@ -103,21 +103,10 @@ public class PageNewUser extends javax.swing.JFrame {
             }
         });
 
-        txtNewPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNewPasswordActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Confirm your password:");
 
         cboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Yes" }));
         cboAdmin.setEnabled(false);
-        cboAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboAdminActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Admin:");
 
@@ -172,18 +161,10 @@ public class PageNewUser extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNewPasswordActionPerformed
-
     
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         userCreator();
     }//GEN-LAST:event_btnCreateAccountActionPerformed
-
-    private void cboAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboAdminActionPerformed
 
     /**
      * @param args the command line arguments

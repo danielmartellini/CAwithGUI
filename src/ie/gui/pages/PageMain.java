@@ -46,9 +46,12 @@ public class PageMain extends javax.swing.JFrame {
                 PageEditMyProfile.txtIdField.setText(resultSet.getString(1));
                 PageEditMyProfile.txtUsername.setText(resultSet.getString(2));
                 PageEditMyProfile.txtPassword.setText(resultSet.getString(3));
-            } else {
+                
+                //i only output the message if the user tries a password that is wrong;
+            } else if (passwordTest!=null){
                 JOptionPane.showMessageDialog(null, "Credentials do NOT Match");
             }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something went wrong in our database");
             System.out.println(e);
@@ -65,15 +68,6 @@ public class PageMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuBar1 = new java.awt.MenuBar();
-        menu1 = new java.awt.Menu();
-        menu2 = new java.awt.Menu();
-        menuBar2 = new java.awt.MenuBar();
-        menu3 = new java.awt.Menu();
-        menu4 = new java.awt.Menu();
-        menuBar3 = new java.awt.MenuBar();
-        menu5 = new java.awt.Menu();
-        menu6 = new java.awt.Menu();
         desktopArea = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         menuMyProfile = new javax.swing.JMenu();
@@ -87,24 +81,6 @@ public class PageMain extends javax.swing.JFrame {
         menuLogout = new javax.swing.JMenu();
         menuItemChangeUser = new javax.swing.JMenuItem();
         menuItemExit = new javax.swing.JMenuItem();
-
-        menu1.setLabel("File");
-        menuBar1.add(menu1);
-
-        menu2.setLabel("Edit");
-        menuBar1.add(menu2);
-
-        menu3.setLabel("File");
-        menuBar2.add(menu3);
-
-        menu4.setLabel("Edit");
-        menuBar2.add(menu4);
-
-        menu5.setLabel("File");
-        menuBar3.add(menu5);
-
-        menu6.setLabel("Edit");
-        menuBar3.add(menu6);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu");
@@ -303,17 +279,8 @@ public class PageMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane desktopArea;
-    private java.awt.Menu menu1;
-    private java.awt.Menu menu2;
-    private java.awt.Menu menu3;
-    private java.awt.Menu menu4;
-    private java.awt.Menu menu5;
-    private java.awt.Menu menu6;
     public static javax.swing.JMenu menuAdminFunctions;
     private javax.swing.JMenuBar menuBar;
-    private java.awt.MenuBar menuBar1;
-    private java.awt.MenuBar menuBar2;
-    private java.awt.MenuBar menuBar3;
     private javax.swing.JMenu menuCalculator;
     private javax.swing.JMenuItem menuItemCalculatorThreeByThree;
     private javax.swing.JMenuItem menuItemCalculatorTwoVariables;
