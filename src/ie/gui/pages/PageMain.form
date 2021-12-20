@@ -50,9 +50,6 @@
             <Property name="text" type="java.lang.String" value="Admin Functions"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAdminFunctionsActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -80,6 +77,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Check users operations"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemOperationsActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

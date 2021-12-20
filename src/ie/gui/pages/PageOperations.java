@@ -5,17 +5,48 @@
  */
 package ie.gui.pages;
 
+import ie.gui.connector.Connector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author danie
  */
 public class PageOperations extends javax.swing.JInternalFrame {
+    
+    Connection connection = null;
+    PreparedStatement sqlStatement = null;
+    ResultSet resultSet = null;
+
 
     /**
      * Creates new form PageOperations
      */
     public PageOperations() {
         initComponents();
+        connection = Connector.connector();
+    }
+    
+    private void fetch() {
+        String sql = "SELECT * FROM operations";
+
+        try {
+            sqlStatement = connection.prepareStatement(sql);
+
+            resultSet = sqlStatement.executeQuery();
+
+            tblOperations.setModel(DbUtils.resultSetToTableModel(resultSet));
+
+          
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database " + e);
+        }
+
     }
 
     /**
@@ -27,21 +58,61 @@ public class PageOperations extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOperations = new javax.swing.JTable();
+        btnFetch = new javax.swing.JButton();
+
+        tblOperations.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblOperations);
+
+        btnFetch.setText("Look for operations made using our calculator");
+        btnFetch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFetchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(btnFetch)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 398, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(btnFetch)
+                .addGap(51, 51, 51)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                .addGap(129, 129, 129))
         );
 
         setBounds(0, 0, 540, 410);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnFetchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFetchActionPerformed
+        fetch();
+    }//GEN-LAST:event_btnFetchActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFetch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblOperations;
     // End of variables declaration//GEN-END:variables
 }

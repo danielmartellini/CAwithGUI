@@ -25,7 +25,7 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
 
     public PageViewUsers() {
         initComponents();
-        // quickSearch();
+       
         connection = Connector.connector();
     }
 

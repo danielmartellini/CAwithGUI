@@ -132,11 +132,6 @@ public class PageMain extends javax.swing.JFrame {
 
         menuAdminFunctions.setText("Admin Functions");
         menuAdminFunctions.setEnabled(false);
-        menuAdminFunctions.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAdminFunctionsActionPerformed(evt);
-            }
-        });
 
         menuItemViewUsers.setText("View Users");
         menuItemViewUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +150,11 @@ public class PageMain extends javax.swing.JFrame {
         menuAdminFunctions.add(menuItemCreateUser);
 
         menuItemOperations.setText("Check users operations");
+        menuItemOperations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemOperationsActionPerformed(evt);
+            }
+        });
         menuAdminFunctions.add(menuItemOperations);
 
         menuBar.add(menuAdminFunctions);
@@ -250,11 +250,11 @@ public class PageMain extends javax.swing.JFrame {
         desktopArea.add(calculatorTwoByTwo);
     }//GEN-LAST:event_menuItemCalculatorTwoVariablesActionPerformed
 
-    private void menuAdminFunctionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdminFunctionsActionPerformed
+    private void menuItemOperationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemOperationsActionPerformed
         PageOperations checkOperations = new PageOperations();
         checkOperations.setVisible(true);
         desktopArea.add(checkOperations);
-    }//GEN-LAST:event_menuAdminFunctionsActionPerformed
+    }//GEN-LAST:event_menuItemOperationsActionPerformed
 
     /**
      * @param args the command line arguments
