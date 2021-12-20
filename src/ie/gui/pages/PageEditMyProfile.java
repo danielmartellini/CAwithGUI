@@ -33,7 +33,7 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
 
     private void update() {
         String sql = "UPDATE user SET username=?,pass=? WHERE id=?";
-        String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
+        String sqlUsernameQuery = "SELECT id FROM user WHERE username=?";
 
         try {
 

@@ -5,6 +5,12 @@
  */
 package ie.gui.pages;
 
+import ie.gui.connector.Connector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,8 +22,12 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
     /**
      * Creates new form PageCalculatorTwoByTwo
      */
+    Connection connection = null;
+    PreparedStatement sqlStatement = null;
+    ResultSet resultSet = null;
     public PageCalculatorTwoVariables() {
         initComponents();
+        connection = Connector.connector();
     }
 
     private void solveTwoVariables() {
@@ -269,6 +279,30 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
         }
         else {
         //code to send equation to database
+         String sqlUpdateOperation = "INSERT INTO operations (operation, result, userId, dateOperation) VALUES(?,?,?,?)";
+        try {
+            sqlStatement = connection.prepareStatement(sqlUpdateOperation);
+            sqlStatement.setString(1,txtXone.getText()+"x + "+txtYone.getText()+"y = "+txtEqualsone.getText()+" , "+txtXtwo.getText()+"x + "+txtYtwo.getText()+"y = "+txtEqualstwo.getText());
+            sqlStatement.setString(2,"X = "+ txtXfinal.getText()+", Y = "+txtYfinal.getText());
+            
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+            sqlStatement.setString(3,dtf.format(now));
+            sqlStatement.setString(4,dtf.format(now));
+       
+            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
+            sqlStatement.executeUpdate();
+           
+                JOptionPane.showMessageDialog(null, "Operation updated to database.");
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database "+e);
+            System.out.println(e);
+        }
+        
+        
             System.out.println(txtXone.getText()+"x + "+txtYone.getText()+"y = "+txtEqualsone.getText());
             System.out.println(txtXtwo.getText()+"x + "+txtYtwo.getText()+"y = "+txtEqualstwo.getText());
             

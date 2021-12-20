@@ -78,6 +78,7 @@ public class PageMain extends javax.swing.JFrame {
         menuAdminFunctions = new javax.swing.JMenu();
         menuItemViewUsers = new javax.swing.JMenuItem();
         menuItemCreateUser = new javax.swing.JMenuItem();
+        menuItemOperations = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenu();
         menuItemChangeUser = new javax.swing.JMenuItem();
         menuItemExit = new javax.swing.JMenuItem();
@@ -131,6 +132,11 @@ public class PageMain extends javax.swing.JFrame {
 
         menuAdminFunctions.setText("Admin Functions");
         menuAdminFunctions.setEnabled(false);
+        menuAdminFunctions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAdminFunctionsActionPerformed(evt);
+            }
+        });
 
         menuItemViewUsers.setText("View Users");
         menuItemViewUsers.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +153,9 @@ public class PageMain extends javax.swing.JFrame {
             }
         });
         menuAdminFunctions.add(menuItemCreateUser);
+
+        menuItemOperations.setText("Check users operations");
+        menuAdminFunctions.add(menuItemOperations);
 
         menuBar.add(menuAdminFunctions);
 
@@ -241,6 +250,12 @@ public class PageMain extends javax.swing.JFrame {
         desktopArea.add(calculatorTwoByTwo);
     }//GEN-LAST:event_menuItemCalculatorTwoVariablesActionPerformed
 
+    private void menuAdminFunctionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdminFunctionsActionPerformed
+        PageOperations checkOperations = new PageOperations();
+        checkOperations.setVisible(true);
+        desktopArea.add(checkOperations);
+    }//GEN-LAST:event_menuAdminFunctionsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,6 +303,7 @@ public class PageMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCreateUser;
     private javax.swing.JMenuItem menuItemEditMyProfile;
     private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemOperations;
     public javax.swing.JMenuItem menuItemViewUsers;
     private javax.swing.JMenu menuLogout;
     public static javax.swing.JMenu menuMyProfile;

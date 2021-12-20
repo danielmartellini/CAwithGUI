@@ -5,6 +5,10 @@
  */
 package ie.gui.pages;
 
+import ie.gui.connector.Connector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,11 +20,16 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
     /**
      * Creates new form PageCalculatorThreeVariables
      */
+    Connection connection = null;
+    PreparedStatement sqlStatement = null;
+    ResultSet resultSet = null;
+
     public PageCalculatorThreeVariables() {
         initComponents();
+        connection = Connector.connector();
     }
-    
-    private void solveThreeVariables(){
+
+    private void solveThreeVariables() {
         double a11, a12, a13, constant1;
         double a21, a22, a23, constant2;
         double a31, a32, a33, constant3;
@@ -49,7 +58,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                 constant3 = Double.parseDouble(txtEqualsthree.getText());
                 double det = 0;
                 double matrice[][] = new double[3][3];
-                
+
                 double invertedMatrice[][] = new double[3][3];
                 try {
 
@@ -68,44 +77,33 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                     for (int i = 0; i < 3; i++) {
                         det = det + (matrice[0][i] * (matrice[1][(i + 1) % 3] * matrice[2][(i + 2) % 3] - matrice[1][(i + 2) % 3] * matrice[2][(i + 1) % 3]));
                     }
-                    
-                    txtDet.setText(String.valueOf(det));
-                    
-                    if(det==0){
-                    JOptionPane.showMessageDialog(null, "Determinant equal to Zero, impossible to proceed.");
-                    }
-                    else{
 
-                    for (int i = 0; i < 3; ++i) {
-                        for (int j = 0; j < 3; ++j) {
-                           
-                             invertedMatrice[i][j]=((((matrice[(j + 1) % 3][(i + 1) % 3] * matrice[(j + 2) % 3][(i + 2) % 3]) - (matrice[(j + 1) % 3][(i + 2) % 3] * matrice[(j + 2) % 3][(i + 1) % 3])) / det));
+                    txtDet.setText(String.valueOf(det));
+
+                    if (det == 0) {
+                        JOptionPane.showMessageDialog(null, "Determinant equal to Zero, impossible to proceed.");
+                    } else {
+
+                        for (int i = 0; i < 3; ++i) {
+                            for (int j = 0; j < 3; ++j) {
+
+                                invertedMatrice[i][j] = ((((matrice[(j + 1) % 3][(i + 1) % 3] * matrice[(j + 2) % 3][(i + 2) % 3]) - (matrice[(j + 1) % 3][(i + 2) % 3] * matrice[(j + 2) % 3][(i + 1) % 3])) / det));
+                            }
+
                         }
 
+                        double doubleXfinal = (invertedMatrice[0][0] * constant1) + (invertedMatrice[0][1] * constant2) + (invertedMatrice[0][2] * constant3);
+                        double doubleYfinal = (invertedMatrice[1][0] * constant1) + (invertedMatrice[1][1] * constant2) + (invertedMatrice[1][2] * constant3);
+                        double doubleZfinal = (invertedMatrice[2][0] * constant1) + (invertedMatrice[2][1] * constant2) + (invertedMatrice[2][2] * constant3);
 
-                        
+                        txtXfinal.setText(String.valueOf(Math.round(doubleXfinal * 100.0) / 100.0));
+                        txtYfinal.setText(String.valueOf(Math.round(doubleYfinal * 100.0) / 100.0));
+                        txtZfinal.setText(String.valueOf(Math.round(doubleZfinal * 100.0) / 100.0));
                     }
-                    
-                    
-                    
-                 
-                        
-                    double doubleXfinal = (invertedMatrice[0][0]*constant1)+(invertedMatrice[0][1]*constant2)+(invertedMatrice[0][2]*constant3);
-                    double doubleYfinal = (invertedMatrice[1][0]*constant1)+(invertedMatrice[1][1]*constant2)+(invertedMatrice[1][2]*constant3);
-                    double doubleZfinal= (invertedMatrice[2][0]*constant1)+(invertedMatrice[2][1]*constant2)+(invertedMatrice[2][2]*constant3) ;
-                        
-                     txtXfinal.setText(String.valueOf(Math.round(doubleXfinal*100.0)/100.0));
-                     txtYfinal.setText(String.valueOf(Math.round(doubleYfinal*100.0)/100.0));
-                     txtZfinal.setText(String.valueOf(Math.round(doubleZfinal*100.0)/100.0));
-                    }
-                    
-                    
-                    
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Something went wrong with the calculation");
                 }
-                
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "One of the variables entered was not a number, try again!");
@@ -360,15 +358,14 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
     private void btnUploadtoDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadtoDBActionPerformed
         //only gonna work after the equations been solved
-        if("".equals(txtXfinal.getText())){
+        if ("".equals(txtXfinal.getText())) {
             JOptionPane.showMessageDialog(null, "Make sure you solve your equation before you click on update to database");
-        }
-        else {
-        //code to send equation to database
-            System.out.println(txtXone.getText()+"x + "+txtYone.getText()+"y + "+txtZone.getText()+"z = "+txtEqualsone.getText());
-            System.out.println(txtXtwo.getText()+"x + "+txtYtwo.getText()+"y + "+txtZtwo.getText()+"z = "+txtEqualstwo.getText());
-            System.out.println(txtXthree.getText()+"x + "+txtYthree.getText()+"y + "+txtZthree.getText()+"z = "+txtEqualsthree.getText());
-            
+        } else {
+            //code to send equation to database
+            System.out.println(txtXone.getText() + "x + " + txtYone.getText() + "y + " + txtZone.getText() + "z = " + txtEqualsone.getText());
+            System.out.println(txtXtwo.getText() + "x + " + txtYtwo.getText() + "y + " + txtZtwo.getText() + "z = " + txtEqualstwo.getText());
+            System.out.println(txtXthree.getText() + "x + " + txtYthree.getText() + "y + " + txtZthree.getText() + "z = " + txtEqualsthree.getText());
+
         }
     }//GEN-LAST:event_btnUploadtoDBActionPerformed
 
