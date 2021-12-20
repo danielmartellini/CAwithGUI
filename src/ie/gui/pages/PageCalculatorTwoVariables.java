@@ -274,6 +274,27 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
 
     private void btnUpdateToDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateToDBActionPerformed
              //only gonna work after the equations been solved
+             int id=0;
+             //finds the user id to pass it as a parameter to the other table
+              String sqlUsernameQuery = "SELECT * FROM user WHERE username=?;";
+              try {
+            sqlStatement = connection.prepareStatement(sqlUsernameQuery);
+            sqlStatement.setString(1, PageMain.menuMyProfile.getText());
+             
+            resultSet = sqlStatement.executeQuery();
+            resultSet.next();
+              id= resultSet.getInt(1);
+              
+            
+                  resultSet = null;
+           
+            
+              }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong in our database 1 "+e);
+                    
+                    }
+            
         if("".equals(txtXfinal.getText())){
             JOptionPane.showMessageDialog(null, "Make sure you solve your equation before you click on update to database");
         }
@@ -288,7 +309,7 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
             LocalDateTime now = LocalDateTime.now();  
-            sqlStatement.setString(3,dtf.format(now));
+            sqlStatement.setInt(3,id);
             sqlStatement.setString(4,dtf.format(now));
        
             //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
@@ -298,7 +319,7 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
             
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something went wrong in our database "+e);
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database 2"+e);
             System.out.println(e);
         }
         

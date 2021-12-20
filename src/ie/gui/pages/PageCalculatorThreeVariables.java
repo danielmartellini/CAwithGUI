@@ -9,6 +9,8 @@ import ie.gui.connector.Connector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
 /**
@@ -362,11 +364,61 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Make sure you solve your equation before you click on update to database");
         } else {
             //code to send equation to database
+            
+             //only gonna work after the equations been solved
+             int id=0;
+             //finds the user id to pass it as a parameter to the other table
+              String sqlUsernameQuery = "SELECT * FROM user WHERE username=?;";
+              try {
+            sqlStatement = connection.prepareStatement(sqlUsernameQuery);
+            sqlStatement.setString(1, PageMain.menuMyProfile.getText());
+             
+            resultSet = sqlStatement.executeQuery();
+            resultSet.next();
+              id= resultSet.getInt(1);
+              
+            
+                  resultSet = null;
+           
+            
+              }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Something went wrong in our database 1 "+e);
+                    
+                    }
+            
+        if("".equals(txtXfinal.getText())){
+            JOptionPane.showMessageDialog(null, "Make sure you solve your equation before you click on update to database");
+        }
+        else {
+        //code to send equation to database
+         String sqlUpdateOperation = "INSERT INTO operations (operation, result, userId, dateOperation) VALUES(?,?,?,?)";
+        try {
+            sqlStatement = connection.prepareStatement(sqlUpdateOperation);
+            sqlStatement.setString(1,txtXone.getText()+"x + "+txtYone.getText()+"y + "+txtZone.getText()+"z = "+txtEqualsone.getText()+" , "+txtXtwo.getText()+"x + "+txtYtwo.getText()+"y + "+txtZtwo.getText()+"z = "+txtEqualstwo.getText()+" , "+txtXthree.getText()+"x + "+txtYtwo.getText()+"y + "+txtZthree.getText()+"z = "+txtEqualsthree.getText());
+            sqlStatement.setString(2,"X = "+ txtXfinal.getText()+", Y = "+txtYfinal.getText()+", Z = "+txtZfinal.getText());
+            System.out.println(txtXone.getText()+"x + "+txtYone.getText()+"y + "+txtZone.getText()+"z = "+txtEqualsone.getText()+" , "+txtXtwo.getText()+"x + "+txtYtwo.getText()+"y + "+txtZtwo.getText()+"z = "+txtEqualstwo.getText()+" , "+txtXthree.getText()+"x + "+txtYtwo.getText()+"y + "+txtZthree.getText()+"z = "+txtEqualsthree.getText());
+            
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+            sqlStatement.setInt(3,id);
+            sqlStatement.setString(4,dtf.format(now));
+       
+            //Result set returns info from a row, 4 in this case is where we verify is it's and admin or not
+            sqlStatement.executeUpdate();
+           
+                JOptionPane.showMessageDialog(null, "Operation updated to database.");
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database"+e);
+            System.out.println(e);
+        }
             System.out.println(txtXone.getText() + "x + " + txtYone.getText() + "y + " + txtZone.getText() + "z = " + txtEqualsone.getText());
             System.out.println(txtXtwo.getText() + "x + " + txtYtwo.getText() + "y + " + txtZtwo.getText() + "z = " + txtEqualstwo.getText());
             System.out.println(txtXthree.getText() + "x + " + txtYthree.getText() + "y + " + txtZthree.getText() + "z = " + txtEqualsthree.getText());
 
-        }
+        }}
     }//GEN-LAST:event_btnUploadtoDBActionPerformed
 
 

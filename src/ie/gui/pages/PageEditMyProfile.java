@@ -33,7 +33,7 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
 
     private void update() {
         String sql = "UPDATE user SET username=?,pass=? WHERE id=?";
-        String sqlUsernameQuery = "SELECT id FROM user WHERE username=?";
+        String sqlUsernameQuery = "SELECT * FROM user WHERE username=?";
 
         try {
 
@@ -44,8 +44,7 @@ public class PageEditMyProfile extends javax.swing.JInternalFrame {
 //I have this condtion because otherwise i wouldnt be able to edit other details and keep my username as it is  already registered on the database
             if (!originalUsername.equals(txtUsername.getText()) && resultSet.next()) {
                 //user will reach this if username is already taken
-                System.out.println(originalUsername + "original");
-                System.out.println(txtUsername.getText() + "read");
+            
                 JOptionPane.showMessageDialog(null, "This username is already registered in our database");
             } else if ("".equals(txtPassword.getText()) || "".equals(txtUsername.getText())) {
 
