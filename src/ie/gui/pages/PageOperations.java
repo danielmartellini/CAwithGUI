@@ -48,6 +48,14 @@ public class PageOperations extends javax.swing.JInternalFrame {
         }
 
     }
+    
+    private void setFieldsFromTable() {
+        int set = tblOperations.getSelectedRow();
+        txtOperation.setText(tblOperations.getModel().getValueAt(set, 1).toString());
+        txtResult.setText(tblOperations.getModel().getValueAt(set, 2).toString());
+        txtDate.setText(tblOperations.getModel().getValueAt(set, 4).toString());
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +69,15 @@ public class PageOperations extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOperations = new javax.swing.JTable();
         btnFetch = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtOperation = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtResult = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
+
+        setClosable(true);
+        setIconifiable(true);
 
         tblOperations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,6 +90,11 @@ public class PageOperations extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblOperations.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOperationsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblOperations);
 
         btnFetch.setText("Look for operations made using our calculator");
@@ -82,24 +104,61 @@ public class PageOperations extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Operation:");
+
+        txtOperation.setEditable(false);
+
+        jLabel2.setText("Result:");
+
+        txtResult.setEditable(false);
+
+        jLabel3.setText("Date:");
+
+        txtDate.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(btnFetch)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(btnFetch))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtOperation)
+                            .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
                 .addComponent(btnFetch)
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                .addGap(129, 129, 129))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
 
         setBounds(0, 0, 540, 410);
@@ -109,10 +168,20 @@ public class PageOperations extends javax.swing.JInternalFrame {
         fetch();
     }//GEN-LAST:event_btnFetchActionPerformed
 
+    private void tblOperationsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOperationsMouseClicked
+        setFieldsFromTable();
+    }//GEN-LAST:event_tblOperationsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFetch;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOperations;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtOperation;
+    private javax.swing.JTextField txtResult;
     // End of variables declaration//GEN-END:variables
 }
