@@ -316,6 +316,17 @@ public class PageCalculatorTwoVariables extends javax.swing.JInternalFrame {
             sqlStatement.executeUpdate();
            
                 JOptionPane.showMessageDialog(null, "Operation updated to database.");
+                
+            txtDeterminant.setText(null);
+            txtXfinal.setText(null);
+            txtYfinal.setText(null);
+            txtXone.setText(null);
+            txtYone.setText(null);
+            txtXtwo.setText(null);
+            txtYtwo.setText(null);
+            txtEqualsone.setText(null);
+            txtEqualstwo.setText(null);
+            
             
             
         } catch (Exception e) {

@@ -372,10 +372,10 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
               try {
             sqlStatement = connection.prepareStatement(sqlUsernameQuery);
             sqlStatement.setString(1, PageMain.menuMyProfile.getText());
-             
             resultSet = sqlStatement.executeQuery();
             resultSet.next();
-              id= resultSet.getInt(1);
+            //reading id number from the query made using username from main page
+            id= resultSet.getInt(1);
               
             
                   resultSet = null;
@@ -383,7 +383,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             
               }
             catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Something went wrong in our database 1 "+e);
+                JOptionPane.showMessageDialog(null, "Something went wrong in our database, "+e);
                     
                     }
             
@@ -401,6 +401,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
             LocalDateTime now = LocalDateTime.now();  
+           //one user can have more than one operation, so i have one autoincremented id for operations and another column for user id
             sqlStatement.setInt(3,id);
             sqlStatement.setString(4,dtf.format(now));
        
@@ -408,15 +409,36 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             sqlStatement.executeUpdate();
            
                 JOptionPane.showMessageDialog(null, "Operation updated to database.");
+               
+            txtXfinal.setText(null);
+            txtYfinal.setText(null);
+            txtZfinal.setText(null);
+            txtXone.setText(null);
+            txtYone.setText(null);
+            txtZone.setText(null);
+            txtXtwo.setText(null);
+            txtYtwo.setText(null);
+            txtZtwo.setText(null);
+            txtXthree.setText(null);
+            txtYthree.setText(null);
+            txtZthree.setText(null);
+            txtEqualsone.setText(null);
+            txtEqualstwo.setText(null);
+            txtEqualsthree.setText(null);
+            txtDet.setText(null);
+            
+                    
+            
+            
+                
+                
             
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something went wrong in our database"+e);
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database, "+e);
             System.out.println(e);
         }
-            System.out.println(txtXone.getText() + "x + " + txtYone.getText() + "y + " + txtZone.getText() + "z = " + txtEqualsone.getText());
-            System.out.println(txtXtwo.getText() + "x + " + txtYtwo.getText() + "y + " + txtZtwo.getText() + "z = " + txtEqualstwo.getText());
-            System.out.println(txtXthree.getText() + "x + " + txtYthree.getText() + "y + " + txtZthree.getText() + "z = " + txtEqualsthree.getText());
+           
 
         }}
     }//GEN-LAST:event_btnUploadtoDBActionPerformed

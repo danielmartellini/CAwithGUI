@@ -17,11 +17,10 @@ import net.proteanit.sql.DbUtils;
  * @author danie
  */
 public class PageOperations extends javax.swing.JInternalFrame {
-    
+
     Connection connection = null;
     PreparedStatement sqlStatement = null;
     ResultSet resultSet = null;
-
 
     /**
      * Creates new form PageOperations
@@ -30,7 +29,7 @@ public class PageOperations extends javax.swing.JInternalFrame {
         initComponents();
         connection = Connector.connector();
     }
-    
+
     private void fetch() {
         String sql = "SELECT * FROM operations";
 
@@ -41,19 +40,34 @@ public class PageOperations extends javax.swing.JInternalFrame {
 
             tblOperations.setModel(DbUtils.resultSetToTableModel(resultSet));
 
-          
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something went wrong in our database " + e);
         }
 
     }
-    
+
     private void setFieldsFromTable() {
         int set = tblOperations.getSelectedRow();
         txtOperation.setText(tblOperations.getModel().getValueAt(set, 1).toString());
         txtResult.setText(tblOperations.getModel().getValueAt(set, 2).toString());
         txtDate.setText(tblOperations.getModel().getValueAt(set, 4).toString());
+        System.out.println("parameter " + tblOperations.getModel().getValueAt(set, 3));
+        String sql = "SELECT * FROM user WHERE id=?";
+
+        try {
+
+            sqlStatement = connection.prepareStatement(sql);
+            sqlStatement.setString(1, tblOperations.getModel().getValueAt(set, 3).toString());
+
+            resultSet = sqlStatement.executeQuery();
+
+            resultSet.next();
+
+            txtUsername.setText(resultSet.getString(2));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something went wrong in our database, " + e);
+        }
 
     }
 
@@ -75,6 +89,8 @@ public class PageOperations extends javax.swing.JInternalFrame {
         txtResult = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -116,6 +132,8 @@ public class PageOperations extends javax.swing.JInternalFrame {
 
         txtDate.setEditable(false);
 
+        jLabel4.setText("Username:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,13 +148,20 @@ public class PageOperations extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtOperation)
                             .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(221, 221, 221)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -155,9 +180,13 @@ public class PageOperations extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(78, 78, 78))
         );
 
@@ -178,10 +207,12 @@ public class PageOperations extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOperations;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtOperation;
     private javax.swing.JTextField txtResult;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
