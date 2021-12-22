@@ -154,20 +154,21 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsers = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        lblSearch = new javax.swing.JLabel();
         txtQuickSearch = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         cboAdmin = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
+        lblAdmin = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnFetch = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("View users");
 
         tblUsers = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
@@ -201,7 +202,7 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblUsers);
 
-        jLabel1.setText("Quick search:");
+        lblSearch.setText("Search by username:");
 
         txtQuickSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,13 +215,13 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setText("Username:");
+        lblUsername.setText("Username:");
 
-        jLabel3.setText("Password:");
+        lblPassword.setText("Password:");
 
         cboAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User" }));
 
-        jLabel4.setText("Admin:");
+        lblAdmin.setText("Admin:");
 
         btnUpdate.setText("Update User");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -253,14 +254,14 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(lblPassword)
+                            .addComponent(lblUsername))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsername)
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                         .addGap(40, 40, 40)
-                        .addComponent(jLabel4)
+                        .addComponent(lblAdmin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
@@ -272,9 +273,9 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnFetch)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lblSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -284,20 +285,20 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
                 .addComponent(btnFetch)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblSearch)
                     .addComponent(txtQuickSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lblUsername)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
+                    .addComponent(lblAdmin)
                     .addComponent(btnUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(lblPassword)
                     .addComponent(btnDelete)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -339,11 +340,11 @@ public class PageViewUsers extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFetch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cboAdmin;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAdmin;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblSearch;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtQuickSearch;
