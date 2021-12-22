@@ -54,7 +54,6 @@ public class PageLogin extends javax.swing.JFrame {
             if (resultSet.next()) {
                 
                 String isAdmin= resultSet.getString(4);
-                System.out.println(isAdmin);
                 if(isAdmin.equals("1")){
                 PageMain pageMain = new PageMain();
                 pageMain.setVisible(true);
@@ -186,7 +185,7 @@ public class PageLogin extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(439, 260));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

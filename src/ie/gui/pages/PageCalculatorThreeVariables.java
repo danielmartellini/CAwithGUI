@@ -44,6 +44,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "It seems that one of your variables on the third equation was left blank");
         } else {
             try {
+                //parsing int to double
                 a11 = Double.parseDouble(txtXone.getText());
                 a12 = Double.parseDouble(txtYone.getText());
                 a13 = Double.parseDouble(txtZone.getText());
@@ -63,6 +64,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
                 double invertedMatrice[][] = new double[3][3];
                 try {
+                    //assigning values to array
 
                     matrice[0][0] = a11;
                     matrice[0][1] = a12;
@@ -75,6 +77,8 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                     matrice[2][0] = a31;
                     matrice[2][1] = a32;
                     matrice[2][2] = a33;
+                    
+                    // this website https://www.thejavaprogrammer.com/java-program-find-inverse-matrix/ helped me in finding a way of inverting a 3x3 matrix
 
                     for (int i = 0; i < 3; i++) {
                         det = det + (matrice[0][i] * (matrice[1][(i + 1) % 3] * matrice[2][(i + 2) % 3] - matrice[1][(i + 2) % 3] * matrice[2][(i + 1) % 3]));
@@ -88,6 +92,8 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
                         for (int i = 0; i < 3; ++i) {
                             for (int j = 0; j < 3; ++j) {
+                                
+                                //using % to access the right varible
 
                                 invertedMatrice[i][j] = ((((matrice[(j + 1) % 3][(i + 1) % 3] * matrice[(j + 2) % 3][(i + 2) % 3]) - (matrice[(j + 1) % 3][(i + 2) % 3] * matrice[(j + 2) % 3][(i + 1) % 3])) / det));
                             }
@@ -97,7 +103,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                         double doubleXfinal = (invertedMatrice[0][0] * constant1) + (invertedMatrice[0][1] * constant2) + (invertedMatrice[0][2] * constant3);
                         double doubleYfinal = (invertedMatrice[1][0] * constant1) + (invertedMatrice[1][1] * constant2) + (invertedMatrice[1][2] * constant3);
                         double doubleZfinal = (invertedMatrice[2][0] * constant1) + (invertedMatrice[2][1] * constant2) + (invertedMatrice[2][2] * constant3);
-
+                        //using a method to round my doubles and make sure they only have to numbers after the comma
                         txtXfinal.setText(String.valueOf(Math.round(doubleXfinal * 100.0) / 100.0));
                         txtYfinal.setText(String.valueOf(Math.round(doubleYfinal * 100.0) / 100.0));
                         txtZfinal.setText(String.valueOf(Math.round(doubleZfinal * 100.0) / 100.0));
@@ -126,38 +132,40 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
         txtZthree = new javax.swing.JTextField();
         txtEqualsthree = new javax.swing.JTextField();
         btnSolve = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        lblDet = new javax.swing.JLabel();
         txtYfinal = new javax.swing.JTextField();
         txtXfinal = new javax.swing.JTextField();
         txtZfinal = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblX = new javax.swing.JLabel();
+        lxlY = new javax.swing.JLabel();
+        lblXtwo = new javax.swing.JLabel();
+        lblZ = new javax.swing.JLabel();
+        lblYtwo = new javax.swing.JLabel();
         txtDet = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblZtwo = new javax.swing.JLabel();
         txtXtwo = new javax.swing.JTextField();
         txtYtwo = new javax.swing.JTextField();
         txtZtwo = new javax.swing.JTextField();
         txtEqualstwo = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblXthree = new javax.swing.JLabel();
+        lblYthree = new javax.swing.JLabel();
+        lblZthree = new javax.swing.JLabel();
+        lblXone = new javax.swing.JLabel();
+        lblYone = new javax.swing.JLabel();
+        lblZone = new javax.swing.JLabel();
         txtXone = new javax.swing.JTextField();
         txtYone = new javax.swing.JTextField();
         txtZone = new javax.swing.JTextField();
         txtEqualsone = new javax.swing.JTextField();
         txtXthree = new javax.swing.JTextField();
         txtYthree = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        lblWarning = new javax.swing.JLabel();
         btnUploadtoDB = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
+        setResizable(true);
+        setTitle("3 Variables calculator");
         setPreferredSize(new java.awt.Dimension(540, 410));
 
         btnSolve.setText("Solve");
@@ -167,7 +175,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setText("Determinant:");
+        lblDet.setText("Determinant:");
 
         txtYfinal.setFocusable(false);
 
@@ -175,33 +183,33 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
 
         txtZfinal.setFocusable(false);
 
-        jLabel12.setText("X =");
+        lblX.setText("X =");
 
-        jLabel13.setText("Y =");
+        lxlY.setText("Y =");
 
-        jLabel4.setText("  x +");
+        lblXtwo.setText("  x +");
 
-        jLabel14.setText("Z = ");
+        lblZ.setText("Z = ");
 
-        jLabel5.setText("  y +");
+        lblYtwo.setText("  y +");
 
         txtDet.setFocusable(false);
 
-        jLabel6.setText("  z =");
+        lblZtwo.setText("  z =");
 
-        jLabel7.setText("  x +");
+        lblXthree.setText("  x +");
 
-        jLabel8.setText("  y +");
+        lblYthree.setText("  y +");
 
-        jLabel9.setText("  z =");
+        lblZthree.setText("  z =");
 
-        jLabel1.setText("  x +");
+        lblXone.setText("  x +");
 
-        jLabel2.setText("  y +");
+        lblYone.setText("  y +");
 
-        jLabel3.setText("  z =");
+        lblZone.setText("  z =");
 
-        jLabel10.setText(" *If you have to enter a negative number just put the negative sign before the number");
+        lblWarning.setText(" *If you have to enter a negative number just put the negative sign before it.");
 
         btnUploadtoDB.setText("Upload operation to database");
         btnUploadtoDB.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +226,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addComponent(lblWarning)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -227,15 +235,15 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel13))
+                                        .addComponent(lxlY))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(btnSolve, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                                        .addComponent(jLabel11)
+                                        .addComponent(lblDet)
                                         .addGap(8, 8, 8)
                                         .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(29, 29, 29)
-                                        .addComponent(jLabel12)))
+                                        .addComponent(lblX)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtXfinal)
@@ -243,7 +251,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnUploadtoDB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(84, 84, 84)
-                                .addComponent(jLabel14)
+                                .addComponent(lblZ)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(108, 108, 108))))
@@ -256,41 +264,41 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                         .addComponent(txtXone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblXone, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblXtwo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblXthree, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txtYthree, javax.swing.GroupLayout.PREFERRED_SIZE, 48, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblYthree, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(txtYone, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addComponent(txtYtwo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblYtwo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblYone, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(txtZthree, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel9)
+                            .addComponent(lblZthree)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtEqualsthree, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addComponent(txtZtwo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel6)
+                            .addComponent(lblZtwo)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtEqualstwo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(txtZone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel3)
+                            .addComponent(lblZone)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(txtEqualsone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(247, 247, 247)))
@@ -302,22 +310,22 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtXfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
+                        .addComponent(lblX))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDet, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtDet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnSolve)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtYfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(lxlY))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtZfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14)
+                    .addComponent(lblZ)
                     .addComponent(btnUploadtoDB))
                 .addGap(31, 31, 31)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblWarning, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -326,32 +334,32 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                         .addComponent(txtYone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtEqualsone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
+                        .addComponent(lblXone)
+                        .addComponent(lblYone)
+                        .addComponent(lblZone)
                         .addComponent(txtXone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtYtwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtZtwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtEqualstwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
+                        .addComponent(lblXtwo)
+                        .addComponent(lblYtwo)
+                        .addComponent(lblZtwo)
                         .addComponent(txtXtwo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtYthree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtZthree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtEqualsthree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)
+                        .addComponent(lblXthree)
+                        .addComponent(lblYthree)
+                        .addComponent(lblZthree)
                         .addComponent(txtXthree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(263, Short.MAX_VALUE)))
         );
 
-        pack();
+        setBounds(0, 0, 540, 410);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSolveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolveActionPerformed
@@ -397,7 +405,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
             sqlStatement = connection.prepareStatement(sqlUpdateOperation);
             sqlStatement.setString(1,txtXone.getText()+"x + "+txtYone.getText()+"y + "+txtZone.getText()+"z = "+txtEqualsone.getText()+" , "+txtXtwo.getText()+"x + "+txtYtwo.getText()+"y + "+txtZtwo.getText()+"z = "+txtEqualstwo.getText()+" , "+txtXthree.getText()+"x + "+txtYtwo.getText()+"y + "+txtZthree.getText()+"z = "+txtEqualsthree.getText());
             sqlStatement.setString(2,"X = "+ txtXfinal.getText()+", Y = "+txtYfinal.getText()+", Z = "+txtZfinal.getText());
-            System.out.println(txtXone.getText()+"x + "+txtYone.getText()+"y + "+txtZone.getText()+"z = "+txtEqualsone.getText()+" , "+txtXtwo.getText()+"x + "+txtYtwo.getText()+"y + "+txtZtwo.getText()+"z = "+txtEqualstwo.getText()+" , "+txtXthree.getText()+"x + "+txtYtwo.getText()+"y + "+txtZthree.getText()+"z = "+txtEqualsthree.getText());
+            
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
             LocalDateTime now = LocalDateTime.now();  
@@ -447,20 +455,20 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSolve;
     private javax.swing.JButton btnUploadtoDB;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblDet;
+    private javax.swing.JLabel lblWarning;
+    private javax.swing.JLabel lblX;
+    private javax.swing.JLabel lblXone;
+    private javax.swing.JLabel lblXthree;
+    private javax.swing.JLabel lblXtwo;
+    private javax.swing.JLabel lblYone;
+    private javax.swing.JLabel lblYthree;
+    private javax.swing.JLabel lblYtwo;
+    private javax.swing.JLabel lblZ;
+    private javax.swing.JLabel lblZone;
+    private javax.swing.JLabel lblZthree;
+    private javax.swing.JLabel lblZtwo;
+    private javax.swing.JLabel lxlY;
     private javax.swing.JTextField txtDet;
     private javax.swing.JTextField txtEqualsone;
     private javax.swing.JTextField txtEqualsthree;

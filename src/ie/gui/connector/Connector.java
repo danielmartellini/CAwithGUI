@@ -12,9 +12,10 @@ import java.sql.*;
  * @author danie
  */
 public class Connector {
-
+//this class is used in multiple other classes in my project, any time I need to connect with my database
     public static Connection connector() {
         java.sql.Connection connection = null;
+        //ca is the name of my database and root is my user and password
         String dbServer = "jdbc:mysql://localhost:3306/ca";
         String user = "root";
         String password = "root";

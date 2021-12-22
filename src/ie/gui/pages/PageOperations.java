@@ -51,7 +51,6 @@ public class PageOperations extends javax.swing.JInternalFrame {
         txtOperation.setText(tblOperations.getModel().getValueAt(set, 1).toString());
         txtResult.setText(tblOperations.getModel().getValueAt(set, 2).toString());
         txtDate.setText(tblOperations.getModel().getValueAt(set, 4).toString());
-        System.out.println("parameter " + tblOperations.getModel().getValueAt(set, 3));
         String sql = "SELECT * FROM user WHERE id=?";
 
         try {
@@ -83,17 +82,18 @@ public class PageOperations extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOperations = new javax.swing.JTable();
         btnFetch = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblOperation = new javax.swing.JLabel();
         txtOperation = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblResult = new javax.swing.JLabel();
         txtResult = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblUsername = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
+        setTitle("check operations uploaded to our database");
 
         tblOperations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,19 +120,24 @@ public class PageOperations extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Operation:");
+        lblOperation.setText("Operation:");
 
         txtOperation.setEditable(false);
+        txtOperation.setFocusable(false);
 
-        jLabel2.setText("Result:");
+        lblResult.setText("Result:");
 
         txtResult.setEditable(false);
+        txtResult.setFocusable(false);
 
-        jLabel3.setText("Date:");
+        lblDate.setText("Date:");
 
         txtDate.setEditable(false);
+        txtDate.setFocusable(false);
 
-        jLabel4.setText("Username:");
+        lblUsername.setText("Username:");
+
+        txtUsername.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,8 +151,8 @@ public class PageOperations extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(lblOperation)
+                    .addComponent(lblResult)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -155,13 +160,13 @@ public class PageOperations extends javax.swing.JInternalFrame {
                             .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(lblDate)
                         .addGap(221, 221, 221)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))))
+                            .addComponent(lblUsername))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -172,17 +177,17 @@ public class PageOperations extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblOperation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtOperation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblResult)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(lblDate)
+                    .addComponent(lblUsername))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,11 +209,11 @@ public class PageOperations extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFetch;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblOperation;
+    private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblUsername;
     private javax.swing.JTable tblOperations;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtOperation;
