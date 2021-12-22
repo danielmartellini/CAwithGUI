@@ -99,6 +99,7 @@ public class PageCalculatorThreeVariables extends javax.swing.JInternalFrame {
                             }
 
                         }
+                        //multiplying inverted matrix with the constants to find the variables value.
 
                         double doubleXfinal = (invertedMatrice[0][0] * constant1) + (invertedMatrice[0][1] * constant2) + (invertedMatrice[0][2] * constant3);
                         double doubleYfinal = (invertedMatrice[1][0] * constant1) + (invertedMatrice[1][1] * constant2) + (invertedMatrice[1][2] * constant3);

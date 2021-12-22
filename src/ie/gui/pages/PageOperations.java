@@ -47,6 +47,7 @@ public class PageOperations extends javax.swing.JInternalFrame {
     }
 
     private void setFieldsFromTable() {
+        //this will select the row I click on the table and put the info on my text fields
         int set = tblOperations.getSelectedRow();
         txtOperation.setText(tblOperations.getModel().getValueAt(set, 1).toString());
         txtResult.setText(tblOperations.getModel().getValueAt(set, 2).toString());
